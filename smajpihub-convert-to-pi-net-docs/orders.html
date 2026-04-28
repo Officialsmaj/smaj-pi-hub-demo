@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SMAJ STORE | Checkout</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/store.css">
+</head>
+<body data-page="store-checkout">
+  <header class="store-topbar">
+    <div class="store-shell store-topbar-inner">
+      <a class="store-brand" href="index.html">
+        <span class="store-brand-mark">S</span>
+        <span>
+          <strong>SMAJ STORE</strong>
+          <small>Checkout</small>
+        </span>
+      </a>
+      <nav class="store-nav" aria-label="Store">
+        <a href="../../index.html">Back to Hub</a>
+        <a href="index.html">Home</a>
+        <a href="category.html">Categories</a>
+        <a href="orders.html">My Orders</a>
+        <a href="cart.html">Cart <span id="storeCartCount" class="cart-badge">0</span></a>
+      </nav>
+      <div id="storeSessionChip" class="session-chip">Checking session...</div>
+    </div>
+  </header>
+
+  <main class="store-shell checkout-layout">
+    <section>
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Checkout</span>
+          <h1>Confirm delivery and payment</h1>
+        </div>
+      </div>
+
+      <form id="checkoutForm" class="checkout-form">
+        <div class="form-grid">
+          <label>
+            Full Name
+            <input id="checkoutName" name="name" type="text" required>
+          </label>
+          <label>
+            Email
+            <input id="checkoutEmail" name="email" type="email" required>
+          </label>
+          <label>
+            Phone
+            <input id="checkoutPhone" name="phone" type="tel" required>
+          </label>
+          <label>
+            Country
+            <input id="checkoutCountry" name="country" type="text" required>
+          </label>
+        </div>
+        <label>
+          Delivery Address
+          <textarea id="checkoutAddress" name="address" rows="4" required></textarea>
+        </label>
+        <label>
+          Order Notes
+          <textarea id="checkoutNotes" name="notes" rows="3" placeholder="Optional delivery or handling notes"></textarea>
+        </label>
+
+        <div class="callout-card">
+          <strong>Shared session payment</strong>
+          <p>Your active SMAJ PI HUB wallet session is reused here. No separate store login is required.</p>
+        </div>
+
+        <button class="btn-primary" type="submit">Place Order</button>
+      </form>
+    </section>
+
+    <aside id="checkoutSummary" class="summary-card"></aside>
+  </main>
+
+  <footer class="store-footer">
+    <div class="store-shell footer-row">
+      <div>
+        <strong>SMAJ STORE</strong>
+        <p>Connected checkout with shared ecosystem identity.</p>
+      </div>
+      <div class="footer-links">
+        <a href="cart.html">Back to Cart</a>
+        <a href="orders.html">Orders</a>
+        <a href="../../index.html">Hub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../js/store-data.js"></script>
+  <script src="../../js/store.js"></script>
+  <script src="../../js/store-checkout.js"></script>
+</body>
+</html>
