@@ -1,51 +1,20 @@
-import type { CSSProperties } from "react";
-import type { User } from "../types/pi.ts";
-
-interface HeaderProps {
-  onSignIn: () => void;
-  onSignOut: () => void;
-  onSendTestNotification: () => void;
-  user: User | null;
-  isLoading?: boolean;
-}
-
-const headerStyle: CSSProperties = {
-  padding: 8,
-  backgroundColor: "gray",
-  color: "white",
-  width: "100%",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between",
-};
-
-const userSectionStyle: CSSProperties = {
-  display: "flex",
-  alignItems: "center",
-  gap: 8,
-};
-
-const Header = ({ user, onSignIn, onSignOut, onSendTestNotification, isLoading }: HeaderProps) => {
+const Header = () => {
   return (
-    <header style={headerStyle}>
-      <div style={{ fontWeight: "bold" }}>Pi Bakery</div>
-
-      <div style={userSectionStyle}>
-        {user ? (
-          <>
-            <span>@{user.username}</span>
-            <button type="button" onClick={onSignOut} disabled={isLoading}>
-              Sign out
-            </button>
-            {user.roles.includes("core_team") && (
-              <button onClick={onSendTestNotification}>Send Test Notification to yourself</button>
-            )}
-          </>
-        ) : (
-          <button onClick={onSignIn} disabled={isLoading}>
-            Sign in
-          </button>
-        )}
+    <header className="smaj-header">
+      <div className="smaj-header-inner">
+        <a href="/" className="smaj-logo-link" aria-label="SMAJ PI HUB Home">
+          <img src="/logo.png" alt="SMAJ PI HUB Logo" className="smaj-logo" />
+        </a>
+        <nav className="smaj-nav" aria-label="Primary">
+          <a href="/">Home</a>
+          <a href="#">About</a>
+          <a href="#">Services</a>
+          <a href="#">White Paper</a>
+          <a href="#">How It Works</a>
+          <a href="#">Pricing</a>
+          <a href="#">FAQ</a>
+          <a href="#">Contact</a>
+        </nav>
       </div>
     </header>
   );
