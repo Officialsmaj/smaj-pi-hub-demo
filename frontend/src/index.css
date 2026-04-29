@@ -110,7 +110,11 @@ h4, h5, h6 {
   flex-wrap: wrap;
 }
 
-.home-hero-cta button {
+.home-hero-cta a {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: 0;
   border-radius: 8px;
   padding: 10px 14px;
@@ -118,12 +122,12 @@ h4, h5, h6 {
   cursor: pointer;
 }
 
-.home-hero-cta button:first-child {
+.home-hero-cta a:first-child {
   background: #6b3fe6;
   color: #fff;
 }
 
-.home-hero-cta button:last-child {
+.home-hero-cta a:last-child {
   background: #efe8ff;
   color: #3f2a7f;
 }
@@ -166,6 +170,26 @@ h4, h5, h6 {
 
 .home-hero-card div {
   padding: 14px;
+}
+
+.content-hero-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.content-panel {
+  background: #ffffff;
+  border: 1px solid #e3d8ff;
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.content-panel ul {
+  margin: 0;
+  padding-left: 18px;
+  color: #5d4f80;
 }
 
 .home-section {
@@ -229,6 +253,99 @@ h4, h5, h6 {
   color: #5d4f80;
 }
 
+.content-step-grid,
+.price-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.status-chip {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #3f2a7f;
+  background: #efe8ff;
+  padding: 5px 8px;
+  border-radius: 999px;
+}
+
+.wp-list {
+  margin: 0;
+  padding-left: 18px;
+  color: #5d4f80;
+  display: grid;
+  gap: 6px;
+}
+
+.wp-modules-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.wp-roadmap-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.plan-price {
+  font-weight: 700;
+  color: #3f2a7f;
+}
+
+.faq-list {
+  display: grid;
+  gap: 10px;
+}
+
+.faq-item {
+  border: 1px solid #e5dcff;
+  border-radius: 8px;
+  background: #fbf9ff;
+  padding: 10px 12px;
+}
+
+.faq-item summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.faq-item p {
+  color: #5d4f80;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 14px;
+}
+
+.contact-form {
+  display: grid;
+  gap: 8px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  border: 1px solid #d8ccfb;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.contact-form button {
+  border: 0;
+  border-radius: 8px;
+  padding: 10px 14px;
+  background: #6b3fe6;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
 .smaj-footer {
   background: #221740;
   color: #d9d1f5;
@@ -283,9 +400,18 @@ h4, h5, h6 {
     grid-template-columns: 1fr;
   }
 
+  .content-hero-grid,
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
   .home-service-grid,
   .home-highlight-grid,
-  .home-trust-grid {
+  .home-trust-grid,
+  .content-step-grid,
+  .price-grid,
+  .wp-modules-grid,
+  .wp-roadmap-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -298,7 +424,11 @@ h4, h5, h6 {
   .home-proof,
   .home-service-grid,
   .home-highlight-grid,
-  .home-trust-grid {
+  .home-trust-grid,
+  .content-step-grid,
+  .price-grid,
+  .wp-modules-grid,
+  .wp-roadmap-grid {
     grid-template-columns: 1fr;
   }
 

@@ -6,14 +6,14 @@ Goal: convert `smajpihub-convert-to-pi-net-docs` into the Vite React + TypeScrip
 
 - [x] Keep current Pi brand color palette and core layout structure in React homepage.
 - [x] Port core homepage sections (`hero`, `services preview`, `highlights`, `trust`).
-- [ ] Replace all remaining placeholder links with real React routes.
+- [x] Replace all remaining placeholder links with real React routes.
 - [ ] Add responsive QA checklist for mobile, tablet, and desktop.
 
 ## Phase 2: App Shell and Routing
 
-- [ ] Create route map from legacy HTML pages to React routes.
-- [ ] Add shared layout component for header/footer/nav.
-- [ ] Add 404 page and safe redirects for old URLs.
+- [x] Create route map from legacy HTML pages to React routes.
+- [x] Add shared layout component for header/footer/nav.
+- [x] Add 404 page and safe redirects for old URLs.
 - [ ] Define route-level code splitting for large sections.
 
 ## Phase 3: Style System Migration
@@ -25,7 +25,7 @@ Goal: convert `smajpihub-convert-to-pi-net-docs` into the Vite React + TypeScrip
 
 ## Phase 4: Content/Page Conversion
 
-- [ ] Convert `about`, `services`, `how-it-works`, `pricing`, `faq`, and `contact`.
+- [x] Convert `about`, `services`, `how-it-works`, `pricing`, `faq`, and `contact`.
 - [ ] Convert `community`, `developers`, `partners`, and legal pages.
 - [ ] Convert blog listing and blog post templates into typed content models.
 - [ ] Convert dashboard-related static pages into authenticated React views.
