@@ -1,14 +1,15 @@
-import { Link } from "react-router-dom";
+  import { Link } from "react-router-dom";
+import styles from "./HomePage.module.css";
 import AppLayout from "../layouts/AppLayout";
 
 const HomePage = () => {
   return (
     <AppLayout>
-      <main className="home-page">
-        <section className="home-hero">
-          <div className="home-hero-grid">
+      <main className={styles.homePage}>
+        <section className={styles.homeHero}>
+          <div className={styles.homeHeroGrid}>
             <div>
-              <span className="home-kicker">SMAJ PI HUB ECOSYSTEM</span>
+              <span className={styles.homeKicker}>SMAJ PI HUB ECOSYSTEM</span>
               <h1>All Your Pi Services in One Place.</h1>
               <p>
                 Connect once and access services like jobs, healthcare, education, transport, housing, charity, and
