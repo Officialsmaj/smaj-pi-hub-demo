@@ -188,8 +188,21 @@ h4, h5, h6 {
   gap: 12px;
 }
 
+.home-trust-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
 .home-service-card,
 .home-highlight-card {
+  border: 1px solid #e5dcff;
+  border-radius: 8px;
+  padding: 14px;
+  background: #fbf9ff;
+}
+
+.home-trust-card {
   border: 1px solid #e5dcff;
   border-radius: 8px;
   padding: 14px;
@@ -201,8 +214,17 @@ h4, h5, h6 {
   margin-bottom: 8px;
 }
 
+.home-trust-card h3 {
+  margin-bottom: 8px;
+}
+
 .home-service-card p,
 .home-highlight-card p {
+  margin: 0;
+  color: #5d4f80;
+}
+
+.home-trust-card p {
   margin: 0;
   color: #5d4f80;
 }
@@ -262,7 +284,8 @@ h4, h5, h6 {
   }
 
   .home-service-grid,
-  .home-highlight-grid {
+  .home-highlight-grid,
+  .home-trust-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -274,7 +297,8 @@ h4, h5, h6 {
 @media (max-width: 640px) {
   .home-proof,
   .home-service-grid,
-  .home-highlight-grid {
+  .home-highlight-grid,
+  .home-trust-grid {
     grid-template-columns: 1fr;
   }
 
