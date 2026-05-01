@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
+import { useAuthContext } from "../contexts/AuthContext";
 
 const Header = () => {
-  const { user, isAuthenticated, signIn, signOut, isLoading } = useAuth();
+  const { user, isAuthenticated, signIn, signOut, isLoading } = useAuthContext();
 
   return (
     <header className="smaj-header">
