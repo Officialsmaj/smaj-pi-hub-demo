@@ -1,5 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
+import axios from 'axios';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import BoltIcon from '@mui/icons-material/Bolt';
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 import styles from './Header.module.css';
 
 const Header: React.FC = () => {
@@ -8,6 +13,21 @@ const Header: React.FC = () => {
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
+
+  // Check for existing session on mount
+  useEffect(() => {
+    const checkSession = async () => {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/user`, { withCredentials: true });
+        if (response.data?.user) {
+          setUser(response.data.user);
+        }
+      } catch (err) {
+        // No active session found or backend unreachable
+      }
+    };
+    checkSession();
+  }, []);
 
   const handlePiLogin = async () => {
     try {
@@ -20,12 +40,28 @@ const Header: React.FC = () => {
       };
 
       const authResponse = await (window as any).Pi.authenticate(scopes, onIncompletePaymentFound);
-      console.log('Pi Auth Success:', authResponse);
-      setUser(authResponse.user);
       
-      // Phase 6: Call your backend /signin endpoint here
+      // Phase 6: Call backend /signin endpoint to establish session
+      await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/signin`, 
+        { auth: authResponse }, 
+        { withCredentials: true }
+      );
+
+      setUser(authResponse.user);
+      console.log('Pi Auth Success:', authResponse);
     } catch (err) {
       console.error('Pi Authentication failed:', err);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/logout`, {}, { withCredentials: true });
+      setUser(null);
+      closeMenu();
+    } catch (err) {
+      console.error('Logout failed:', err);
     }
   };
 
@@ -50,13 +86,13 @@ const Header: React.FC = () => {
 
         <div className={styles.headerActions}>
           {user ? (
-            <div className={styles.userInfo}>
-              <i className='bx bxs-user-circle'></i>
+            <div className={styles.userInfo} onClick={handleLogout} title="Click to Logout">
+              <AccountCircleIcon />
               <span>{user.username}</span>
             </div>
           ) : (
             <button className={styles.piLoginBtn} onClick={handlePiLogin}>
-              <i className='bx bxs-bolt'></i> Login with Pi
+              <BoltIcon /> Login with Pi
             </button>
           )}
 
@@ -66,7 +102,7 @@ const Header: React.FC = () => {
             onClick={toggleMenu} 
             aria-label="Toggle Menu"
           >
-            <i className={`bx ${isMenuOpen ? 'bx-x' : 'bx-menu'}`}></i>
+            {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
           </button>
         </div>
       </div>
