@@ -9,10 +9,16 @@ import styles from './Header.module.css';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [user, setUser] = useState<{ username: string } | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-  const closeMenu = () => setIsMenuOpen(false);
+  const toggleUserMenu = () => setIsUserMenuOpen(!isUserMenuOpen);
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+    setIsUserMenuOpen(false);
+  };
 
   // Check for existing session on mount
   useEffect(() => {
@@ -24,30 +30,37 @@ const Header: React.FC = () => {
         }
       } catch (err) {
         // No active session found or backend unreachable
+      } finally {
+        setIsLoading(false);
       }
     };
     checkSession();
   }, []);
 
+  const onIncompletePaymentFound = async (payment: any) => {
+    console.log('Incomplete payment found:', payment);
+    try {
+      await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/incomplete`,
+        { payment },
+        { withCredentials: true }
+      );
+    } catch (err) {
+      console.error('Failed to handle incomplete payment:', err);
+    }
+  };
+
   const handlePiLogin = async () => {
     try {
       const scopes = ['username', 'payments'];
-      
-      // Callback for incomplete payments found during auth
-      const onIncompletePaymentFound = (payment: any) => {
-        console.log('Incomplete payment found:', payment);
-        // Implementation details in FLOWS.md
-      };
 
-      const authResponse = await (window as any).Pi.authenticate(scopes, onIncompletePaymentFound);
+      const authResponse = await window.Pi.authenticate(scopes, onIncompletePaymentFound);
       
-      // Phase 6: Call backend /signin endpoint to establish session
       await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/signin`, 
         { auth: authResponse }, 
         { withCredentials: true }
       );
-
       setUser(authResponse.user);
       console.log('Pi Auth Success:', authResponse);
     } catch (err) {
@@ -85,14 +98,26 @@ const Header: React.FC = () => {
         </nav>
 
         <div className={styles.headerActions}>
-          {user ? (
-            <div className={styles.userInfo} onClick={handleLogout} title="Click to Logout">
-              <AccountCircleIcon />
-              <span>{user.username}</span>
+          {isLoading ? (
+            <div className={styles.loader} />
+          ) : user ? (
+            <div className={styles.userContainer}>
+              <div className={styles.userInfo} onClick={toggleUserMenu}>
+                <AccountCircleIcon />
+                <span>{user.username}</span>
+              </div>
+              
+              {isUserMenuOpen && (
+                <div className={styles.userDropdown}>
+                  <Link to="/profile" onClick={closeMenu}>My Profile</Link>
+                  <button onClick={handleLogout}>Logout</button>
+                </div>
+              )}
             </div>
           ) : (
             <button className={styles.piLoginBtn} onClick={handlePiLogin}>
-              <BoltIcon /> Login with Pi
+              <BoltIcon /> 
+              <span>Login with Pi</span>
             </button>
           )}
 

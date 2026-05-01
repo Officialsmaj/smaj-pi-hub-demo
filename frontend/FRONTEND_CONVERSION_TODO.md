@@ -40,6 +40,10 @@ Goal: convert `smajpihub-convert-to-pi-net-docs` into the Vite React + TypeScrip
 ## Phase 6: Pi Demo Integration
 
 - [x] Wire Pi auth flow and wallet-aware session state. (Header implementation complete)
+- [x] Implement redirect/modal logic for `onIncompletePaymentFound` in Header.
+- [x] Add visual "Active" route indicators to the Mobile Navigation drawer.
+- [x] Add a User Profile dropdown menu (Logout/Profile) for authenticated users.
+- [x] Add loading states for the Login/Session check transition.
 - [ ] Connect storefront and engagement tasks to backend APIs.
 - [ ] Add typed API client layer and request error handling.
 - [ ] Add loading/empty/error states across all data views.
