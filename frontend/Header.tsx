@@ -20,6 +20,33 @@ const Header: React.FC = () => {
     setIsUserMenuOpen(false);
   };
 
+  // Detect desktop width and auto-close menu on resize to desktop
+  useEffect(() => {
+    const handleResize = () => {
+      const desktop = window.innerWidth >= 1024;
+      if (desktop && isMenuOpen) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    // Check initially and on resize
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isMenuOpen]);
+
+  // Prevent body scroll when menu is open on mobile
+  useEffect(() => {
+    if (isMenuOpen && window.innerWidth < 1024) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMenuOpen]);
+
   // Check for existing session on mount
   useEffect(() => {
     const checkSession = async () => {

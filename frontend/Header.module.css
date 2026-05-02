@@ -15,11 +15,16 @@
   justify-content: space-between;
 }
 
+.logoLink {
+  text-decoration: none;
+}
+
 .logo {
   height: 42px;
   display: block;
 }
 
+/* Desktop Navigation - hidden on mobile/tablet by default */
 .desktopNav {
   display: none;
 }
@@ -83,7 +88,8 @@
   z-index: 1010;
 }
 
-.userDropdown a, .userDropdown button {
+.userDropdown a,
+.userDropdown button {
   padding: 0.75rem 1rem;
   text-decoration: none;
   color: #333;
@@ -93,9 +99,11 @@
   font-size: 0.9rem;
   cursor: pointer;
   width: 100%;
+  transition: background-color 0.2s, color 0.2s;
 }
 
-.userDropdown a:hover, .userDropdown button:hover {
+.userDropdown a:hover,
+.userDropdown button:hover {
   background-color: #f5f5f5;
   color: #673ab7;
 }
@@ -110,8 +118,12 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .menuToggle {
@@ -122,73 +134,277 @@
   color: #333;
   display: flex;
   align-items: center;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: background-color 0.2s;
 }
 
+.menuToggle:hover {
+  background-color: #f5f5f5;
+}
+
+/* ============================================
+   RESPONSIVE BREAKPOINTS
+   ============================================ */
+
+/* ============================================
+   TABLET (768px - 1023px)
+   Tablet shows hamburger but with bigger drawer
+   ============================================ */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .header {
+    padding: 0.75rem 2rem;
+  }
+
+  .desktopNav {
+    display: none;
+  }
+
+  .menuToggle {
+    display: flex;
+  }
+
+  /* Tablet Drawer - wider than mobile */
+  .mobileNav {
+    position: fixed;
+    top: 0;
+    right: -320px;
+    width: 320px;
+    height: 100%;
+    background: #fff;
+    z-index: 1002;
+    transition: right 0.3s ease;
+    padding: 4rem 2rem;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+    overflow-y: auto;
+  }
+
+  .mobileNavOpen {
+    right: 0;
+  }
+
+  .mobileNavLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .mobileNavLinks a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.15rem;
+    font-weight: 500;
+    padding: 1rem 1.25rem;
+    border-left: 3px solid transparent;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+  }
+
+  .mobileNavLinks a:hover {
+    background-color: #f5f5f5;
+    color: #673ab7;
+  }
+
+  .mobileNavLinks a:global(.active) {
+    color: #673ab7;
+    border-left-color: #673ab7;
+    background: linear-gradient(90deg, #f3e5f5 0%, transparent 100%);
+  }
+}
+
+/* ============================================
+   DESKTOP (1024px and above)
+   Full navigation visible, no hamburger needed
+   ============================================ */
 @media (min-width: 1024px) {
+  .header {
+    padding: 0.75rem 2rem;
+  }
+
   .desktopNav {
     display: flex;
     gap: 1.5rem;
   }
+
   .desktopNav a {
     text-decoration: none;
     color: #555;
     font-weight: 500;
     transition: color 0.2s;
+    padding: 0.5rem 0;
+    position: relative;
   }
-  .desktopNav a:hover, .desktopNav :global(.active) {
+
+  .desktopNav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #673ab7;
+    transition: width 0.2s ease;
+  }
+
+  .desktopNav a:hover::after,
+  .desktopNav a:global(.active)::after {
+    width: 100%;
+  }
+
+  .desktopNav a:hover,
+  .desktopNav a:global(.active) {
     color: #673ab7;
   }
+
   .menuToggle {
     display: none;
   }
 }
 
-/* Mobile Drawer */
-.menuOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 1001;
+/* ============================================
+   MOBILE (below 768px)
+   Hamburger required, compact drawer
+   ============================================ */
+@media (max-width: 767px) {
+  .header {
+    padding: 0.6rem 1rem;
+  }
+
+  .logo {
+    height: 36px;
+  }
+
+  .desktopNav {
+    display: none;
+  }
+
+  .menuToggle {
+    display: flex;
+    font-size: 1.6rem;
+  }
+
+  .headerActions {
+    gap: 0.5rem;
+  }
+
+  .piLoginBtn {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.85rem;
+  }
+
+  .piLoginBtn span {
+    display: none;
+  }
+
+  /* Mobile Overlay - semi-transparent backdrop */
+  .menuOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  /* Mobile Drawer - slides from right */
+  .mobileNav {
+    position: fixed;
+    top: 0;
+    right: -280px;
+    width: 280px;
+    height: 100%;
+    background: #fff;
+    z-index: 1002;
+    transition: right 0.3s ease;
+    padding: 3.5rem 1.5rem;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+    overflow-y: auto;
+  }
+
+  .mobileNavOpen {
+    right: 0;
+  }
+
+  .mobileNavLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .mobileNavLinks a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 0.9rem 1rem;
+    border-left: 3px solid transparent;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+  }
+
+  .mobileNavLinks a:hover {
+    background-color: #f5f5f5;
+    color: #673ab7;
+  }
+
+  .mobileNavLinks a:global(.active) {
+    color: #673ab7;
+    border-left-color: #673ab7;
+    background: linear-gradient(90deg, #f3e5f5 0%, transparent 100%);
+  }
+
+  /* User dropdown on mobile */
+  .userContainer {
+    position: static;
+  }
+
+  .userInfo {
+    padding: 0.4rem;
+    font-size: 0.9rem;
+  }
+
+  .userDropdown {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    border-radius: 16px 16px 0 0;
+    padding: 1rem 0;
+    flex-direction: row;
+    justify-content: space-around;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .userDropdown a,
+  .userDropdown button {
+    text-align: center;
+    padding: 0.75rem;
+  }
 }
 
-.mobileNav {
-  position: fixed;
-  top: 0;
-  right: -280px;
-  width: 280px;
-  height: 100%;
-  background: #fff;
-  z-index: 1002;
-  transition: right 0.3s ease;
-  padding: 3rem 2rem;
+/* Animations */
+
+/* Fade in animation for menu */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
-.mobileNavOpen {
-  right: 0;
-}
-
-.mobileNavLinks {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.mobileNavLinks a {
-  text-decoration: none;
-  color: #333;
-  font-size: 1.1rem;
-  font-weight: 500;
-  padding: 0.5rem 0;
-  border-left: 3px solid transparent;
-  padding-left: 1rem;
-  transition: all 0.2s;
-}
-
-.mobileNavLinks a:global(.active) {
-  color: #673ab7;
-  border-left-color: #673ab7;
-  background: linear-gradient(90deg, #f3e5f5 0%, transparent 100%);
+/* Slide in from right for drawer */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
