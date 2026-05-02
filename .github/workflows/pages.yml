@@ -43,9 +43,8 @@ jobs:
     permissions:
       pages: write
       id-token: write
+    environment:
+      name: github-pages
     steps:
-      - name: Download Pages artifact
-        uses: actions/download-pages-artifact@v1
-
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
