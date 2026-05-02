@@ -40,12 +40,12 @@ chmod +x /usr/local/bin/docker-compose
 ### 2. Get a server and set up your DNS
 
 Obtain a domain name and set up 2 DNS records pointing to your server. One will be used for the frontend app, and one
-will be used for the backend app.
+will be used for the backend app. (Note: If using GitHub Pages for the frontend, you only need to manage the backend domain).
 
-Here is an example, assuming your domain name is smajpihub.com and your server IP is 123.123.123.123.
+Here is an example, assuming your domain is officialsmaj.github.io and your server IP is 123.123.123.123.
 
 ```DNS
-A   smajpihub.com           123.123.123.123
+A   officialsmaj.github.io   123.123.123.123
 A   backend.smajpihub.com   123.123.123.123
 ```
 

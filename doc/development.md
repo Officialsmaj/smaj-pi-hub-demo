@@ -44,7 +44,7 @@ Once you submit the form, it will bring you to your app's main page. From here, 
 ### App Configuration:
 
 - **Whitelisted usernames:** Leave blank for now
-- **App URL:** Use your intended production URL (e.g., `https://mydemoapp.com`) or a placeholder (e.g., `https://example.com`). Must be HTTPS.
+- **App URL:** Use your intended production URL (e.g., `https://officialsmaj.github.io/smajpihub/home`) or a placeholder (e.g., `https://example.com`). Must be HTTPS.
 
 Before proceeding, click the "API Key" button on your app's main page and save the generated key—you'll need it for setup.
 

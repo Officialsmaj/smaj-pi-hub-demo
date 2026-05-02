@@ -137,6 +137,16 @@
   padding: 0.5rem;
   border-radius: 8px;
   transition: background-color 0.2s;
+  z-index: 1003;
+}
+
+/* Mobile Nav and Overlay - hidden by default */
+.mobileNav {
+  display: none;
+}
+
+.menuOverlay {
+  display: none;
 }
 
 .menuToggle:hover {
@@ -164,7 +174,7 @@
     display: flex;
   }
 
-  /* Tablet Drawer - wider than mobile */
+/* Tablet Drawer - wider than mobile */
   .mobileNav {
     position: fixed;
     top: 0;
@@ -177,10 +187,24 @@
     padding: 4rem 2rem;
     box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
     overflow-y: auto;
+    display: block;
   }
 
   .mobileNavOpen {
     right: 0;
+    display: block;
+  }
+
+  /* Tablet Overlay */
+  .menuOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+    display: block;
   }
 
   .mobileNavLinks {
@@ -296,7 +320,7 @@
     display: none;
   }
 
-  /* Mobile Overlay - semi-transparent backdrop */
+/* Mobile Overlay - semi-transparent backdrop */
   .menuOverlay {
     position: fixed;
     top: 0;
@@ -307,6 +331,7 @@
     z-index: 1001;
     opacity: 1;
     transition: opacity 0.3s ease;
+    display: block;
   }
 
   /* Mobile Drawer - slides from right */
@@ -322,10 +347,12 @@
     padding: 3.5rem 1.5rem;
     box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
     overflow-y: auto;
+    display: block;
   }
 
   .mobileNavOpen {
     right: 0;
+    display: block;
   }
 
   .mobileNavLinks {
