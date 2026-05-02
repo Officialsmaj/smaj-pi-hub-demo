@@ -1,6 +1,7 @@
   import { Link } from "react-router-dom";
 import styles from "./HomePage.module.css";
 import AppLayout from "../layouts/AppLayout";
+import heroImage from "/smaj-hero.png";
 
 const HomePage = () => {
   return (
@@ -36,7 +37,7 @@ const HomePage = () => {
             </div>
 
             <article className="home-hero-card">
-              <img src="/smaj-hero.png" alt="SMAJ PI HUB platform overview" />
+              <img src={heroImage} alt="SMAJ PI HUB platform overview" />
               <div>
                 <h3>Everything in one Pi ecosystem</h3>
                 <p>Access real utility services from a single trusted platform.</p>

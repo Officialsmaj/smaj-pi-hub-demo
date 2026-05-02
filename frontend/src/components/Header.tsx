@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
+import logoImage from "/logo.png";
 
 const Header = () => {
   const { user, isAuthenticated, signIn, signOut, isLoading } = useAuthContext();
@@ -8,7 +9,7 @@ const Header = () => {
     <header className="smaj-header">
       <div className="smaj-header-inner">
         <NavLink to="/" className="smaj-logo-link" aria-label="SMAJ PI HUB Home">
-          <img src="/logo.png" alt="SMAJ PI HUB Logo" className="smaj-logo" />
+          <img src={logoImage} alt="SMAJ PI HUB Logo" className="smaj-logo" />
         </NavLink>
         <nav className="smaj-nav" aria-label="Primary">
           <NavLink to="/">Home</NavLink>
