@@ -14,7 +14,8 @@ Goal: convert `smajpihub-convert-to-pi-net-docs` into the Vite React + TypeScrip
 - [x] Create route map from legacy HTML pages to React routes.
 - [x] Add shared layout component for header/footer/nav.
 - [x] Add 404 page and safe redirects for old URLs.
-- [ ] Define route-level code splitting for large sections.
+- [x] Ensure homepage redirects to `/home` (GitHub Pages subfolder support).
+- [ ] Update Header logo to link explicitly to `/home`.
 
 ## Phase 3: Style System Migration
 

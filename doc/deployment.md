@@ -77,7 +77,7 @@ This will bring you to the App Dashboard, from this screen, you can continue the
 - App Configuration: Additional information that can be adjusted
   - Whitelisted usernames: you can leave this blank at this point
   - Hosting type: select `Self Hosted`
-  - App URL: Enter the intended production URL of your app (e.g "https://mydemoapp.com"),
+  - App URL: Enter the intended production URL of your app (e.g "https://officialsmaj.github.io/smajpihub/home"),
     or simply set it up to an example value (e.g "https://example.com"). This must be an HTTPs URL.
   - Development URL: This is irrelevant for deployment.
 

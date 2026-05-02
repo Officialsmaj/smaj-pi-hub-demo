@@ -95,7 +95,7 @@ export const router = createBrowserRouter(
     },
   ],
   {
-    basename: "/smaj-pi-hub-demo",
+    basename: "/smajpihub",
   },
 );
 

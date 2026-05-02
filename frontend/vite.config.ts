@@ -6,7 +6,7 @@ import * as path from "node:path";
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
   return {
-    base: "/smaj-pi-hub-demo/",
+    base: "/smajpihub/",
     plugins: [
       react(),
       {
