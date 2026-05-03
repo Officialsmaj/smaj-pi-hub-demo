@@ -1,10 +1,12 @@
 import AppLayout from "../layouts/AppLayout";
+import Card from "../components/Card";
+import Section from "../components/Section";
 
 const AboutPage = () => {
   return (
     <AppLayout>
       <main className="home-page">
-        <section className="home-hero">
+        <Section variant="hero" className="home-hero">
           <div className="content-hero-grid">
             <div>
               <span className="home-kicker">ABOUT SMAJ PI HUB</span>
@@ -24,30 +26,27 @@ const AboutPage = () => {
               </ul>
             </aside>
           </div>
-        </section>
+        </Section>
 
-        <section className="home-section">
+        <Section className="home-section">
           <div className="home-service-grid">
-            <article className="home-service-card">
-              <h3>Mission</h3>
+            <Card title="Mission">
               <p>
                 Create real economic utility for Pi by building a trusted platform where users and providers transact
                 and grow together.
               </p>
-            </article>
-            <article className="home-service-card">
-              <h3>Vision</h3>
+            </Card>
+            <Card title="Vision">
               <p>
                 Empower a borderless ecosystem where anyone can use their skills and services to generate sustainable
                 opportunity.
               </p>
-            </article>
-            <article className="home-service-card">
-              <h3>Trust</h3>
+            </Card>
+            <Card title="Trust">
               <p>Ensure secure transactions, transparent process, and reliable standards across every service flow.</p>
-            </article>
+            </Card>
           </div>
-        </section>
+        </Section>
       </main>
     </AppLayout>
   );

@@ -1,0 +1,22 @@
+.section {
+  margin-top: 24px;
+  background: #ffffff;
+  border: 1px solid #ece5ff;
+  border-radius: 12px;
+  padding: 22px;
+}
+
+.hero {
+  margin-top: 16px;
+  background: linear-gradient(135deg, #ffffff, #f1ebff);
+  border: 1px solid #e6dcff;
+}
+
+.head {
+  margin-bottom: 14px;
+}
+
+.description {
+  margin-top: 0;
+  color: #665a82;
+}

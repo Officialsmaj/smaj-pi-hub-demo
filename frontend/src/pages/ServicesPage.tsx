@@ -1,5 +1,7 @@
-import { Link } from "react-router-dom";
 import AppLayout from "../layouts/AppLayout";
+import Card from "../components/Card";
+import Section from "../components/Section";
+import ActionButton from "../components/ActionButton";
 
 const platforms = [
   ["SMAJ STORE", "Shop products and services with Pi.", "Ready Now"],
@@ -14,7 +16,7 @@ const ServicesPage = () => {
   return (
     <AppLayout>
       <main className="home-page">
-        <section className="home-hero">
+        <Section variant="hero" className="home-hero">
           <div className="content-hero-grid">
             <div>
               <span className="home-kicker">ALL-IN-ONE PI SERVICE HUB</span>
@@ -24,10 +26,12 @@ const ServicesPage = () => {
                 upcoming tools.
               </p>
               <div className="home-hero-cta">
-                <a href="https://officialsmaj.github.io/smaj-ecosystem-dashboard/" target="_blank" rel="noreferrer">
+                <ActionButton href="https://officialsmaj.github.io/smaj-ecosystem-dashboard/">
                   Open Unified Dashboard
-                </a>
-                <Link to="/how-it-works">How It Works</Link>
+                </ActionButton>
+                <ActionButton to="/how-it-works" variant="secondary">
+                  How It Works
+                </ActionButton>
               </div>
             </div>
             <aside className="content-panel">
@@ -35,23 +39,18 @@ const ServicesPage = () => {
               <p>One wallet, one identity, one user journey across connected SMAJ services.</p>
             </aside>
           </div>
-        </section>
+        </Section>
 
-        <section className="home-section">
-          <div className="home-section-head">
-            <h2>Platform Directory</h2>
-            <p>Choose where to go next.</p>
-          </div>
+        <Section className="home-section" title="Platform Directory" description="Choose where to go next.">
           <div className="home-service-grid">
             {platforms.map(([name, description, status]) => (
-              <article key={name} className="home-service-card">
-                <h3>{name}</h3>
+              <Card key={name} title={name}>
                 <p>{description}</p>
                 <span className="status-chip">{status}</span>
-              </article>
+              </Card>
             ))}
           </div>
-        </section>
+        </Section>
       </main>
     </AppLayout>
   );

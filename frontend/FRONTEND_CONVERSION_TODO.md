@@ -22,7 +22,7 @@ Goal: convert `smajpihub-convert-to-pi-net-docs` into the Vite React + TypeScrip
 - [ ] Extract design tokens (colors, spacing, radius, shadows) from legacy CSS.
 - [ ] Move repeated styles into reusable React-friendly CSS modules or styled components.
 - [ ] Keep visual parity first, then clean up duplicated CSS.
-- [ ] Build a reusable section/card/button component set.
+- [x] Build a reusable section/card/button component set.
 
 ## Phase 4: Content/Page Conversion
 
