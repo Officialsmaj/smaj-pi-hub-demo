@@ -10,6 +10,7 @@ interface AuthContextType {
   closeSignIn: () => void;
   requireAuth: () => void;
   isLoading: boolean;
+  authFeedback: ReturnType<typeof useAuth>["authFeedback"];
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -31,6 +32,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       closeSignIn: auth.closeSignIn,
       requireAuth: auth.requireAuth,
       isLoading: auth.isLoading,
+      authFeedback: auth.authFeedback,
     }}>
       {children}
     </AuthContext.Provider>

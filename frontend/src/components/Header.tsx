@@ -18,7 +18,7 @@ const navItems = [
 ];
 
 const Header = () => {
-  const { user, isAuthenticated, signIn, signOut, isLoading } = useAuthContext();
+  const { user, isAuthenticated, signIn, signOut, isLoading, authFeedback } = useAuthContext();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
@@ -92,6 +92,9 @@ const Header = () => {
             </NavLink>
           ))}
           <div className="smaj-mobile-auth-sheet">
+            {authFeedback ? (
+              <p className={`smaj-auth-feedback smaj-auth-feedback-${authFeedback.type}`}>{authFeedback.message}</p>
+            ) : null}
             {isAuthenticated && user ? (
               <div className="smaj-user-info">
                 <span className="smaj-username">{user.username}</span>
@@ -118,6 +121,9 @@ const Header = () => {
           />
         ) : null}
         <div className="smaj-auth-section">
+          {authFeedback ? (
+            <p className={`smaj-auth-feedback smaj-auth-feedback-${authFeedback.type}`}>{authFeedback.message}</p>
+          ) : null}
           {isAuthenticated && user ? (
             <div className="smaj-user-info">
               <span className="smaj-username">{user.username}</span>

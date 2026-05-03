@@ -132,6 +132,7 @@ h4, h5, h6 {
 .smaj-auth-section {
   display: flex;
   align-items: center;
+  gap: 8px;
 }
 
 .smaj-user-info {
@@ -180,6 +181,20 @@ h4, h5, h6 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+
+.smaj-auth-feedback {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.smaj-auth-feedback-success {
+  color: #2d7a43;
+}
+
+.smaj-auth-feedback-error {
+  color: #b63636;
 }
 
 .home-hero {
@@ -552,6 +567,10 @@ h4, h5, h6 {
     padding-top: 14px;
   }
 
+  .smaj-mobile-auth-sheet .smaj-auth-feedback {
+    margin-bottom: 8px;
+  }
+
   .smaj-mobile-auth-sheet .smaj-user-info {
     display: grid;
     gap: 10px;
@@ -643,6 +662,10 @@ h4, h5, h6 {
     display: block;
     border-top: 1px solid #ece5ff;
     padding-top: 16px;
+  }
+
+  .smaj-mobile-auth-sheet .smaj-auth-feedback {
+    margin-bottom: 8px;
   }
 
   .smaj-mobile-auth-sheet .smaj-user-info {
