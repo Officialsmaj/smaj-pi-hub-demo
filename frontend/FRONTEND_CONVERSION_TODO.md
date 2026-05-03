@@ -10,6 +10,7 @@ Goal: implement the frontend roadmap, UX, and platform modules according to the 
 - [x] Establish sticky header/footer and responsive navigation (mobile/tablet/desktop drawer behavior).
 - [x] Implement homepage as central gateway experience.
 - [x] Build reusable section/card/button component set.
+- [x] Standardize shared website iconography to MUI Icons.
 - [ ] Finish design-token standardization and remove remaining duplicated style patterns.
 - [ ] Complete responsive QA checklist for all key routes and interaction states.
 

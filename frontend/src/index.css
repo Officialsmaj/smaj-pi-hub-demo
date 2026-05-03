@@ -107,8 +107,10 @@ h4, h5, h6 {
 }
 
 .smaj-menu-toggle-icon {
-  font-size: 18px;
-  line-height: 1;
+  line-height: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .smaj-menu-toggle-label {
@@ -121,6 +123,63 @@ h4, h5, h6 {
 
 .smaj-mobile-auth-sheet {
   display: none;
+}
+
+.smaj-drawer-close {
+  display: none;
+}
+
+.smaj-auth-section {
+  display: flex;
+  align-items: center;
+}
+
+.smaj-user-info {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.smaj-username {
+  font-size: 14px;
+  font-weight: 600;
+  color: #3f2a7f;
+}
+
+.smaj-login-btn,
+.smaj-signout-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid #d8ccfb;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.smaj-login-btn {
+  background: #6b3fe6;
+  border-color: #6b3fe6;
+  color: #fff;
+}
+
+.smaj-signout-btn {
+  background: #fff;
+  color: #3f2a7f;
+}
+
+.smaj-login-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.smaj-login-text {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .home-hero {
@@ -452,6 +511,22 @@ h4, h5, h6 {
     font-size: 0.98rem;
   }
 
+  .smaj-drawer-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-end;
+    gap: 6px;
+    margin-bottom: 8px;
+    border: 1px solid #d8ccfb;
+    background: #fff;
+    color: #3f2a7f;
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
   .smaj-nav-open {
     right: 0;
   }
@@ -488,13 +563,7 @@ h4, h5, h6 {
   }
 
   .smaj-login-icon {
-    display: inline-flex;
-    margin-right: 6px;
-    font-weight: 700;
-  }
-
-  .smaj-login-text {
-    display: none;
+    margin-right: 0;
   }
 }
 
@@ -535,6 +604,22 @@ h4, h5, h6 {
     font-size: 1.15rem;
   }
 
+  .smaj-drawer-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-end;
+    gap: 6px;
+    margin-bottom: 10px;
+    border: 1px solid #d8ccfb;
+    background: #fff;
+    color: #3f2a7f;
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
   .smaj-nav-open {
     right: 0;
   }
@@ -571,9 +656,7 @@ h4, h5, h6 {
   }
 
   .smaj-login-icon {
-    display: inline-flex;
-    margin-right: 6px;
-    font-weight: 700;
+    margin-right: 0;
   }
 }
 
@@ -587,7 +670,9 @@ h4, h5, h6 {
 }
 
 .smaj-footer a {
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   color: #d9d1f5;
   text-decoration: none;
   margin: 0 0 8px;

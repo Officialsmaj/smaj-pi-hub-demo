@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
+import LoginIcon from "@mui/icons-material/Login";
 import { useAuthContext } from "../contexts/AuthContext";
 import logoImage from "/logo.png";
 
@@ -70,11 +73,19 @@ const Header = () => {
           onClick={() => setIsMobileMenuOpen((open) => !open)}
         >
           <span className="smaj-menu-toggle-icon" aria-hidden="true">
-            {isMobileMenuOpen ? "✕" : "☰"}
+            {isMobileMenuOpen ? <CloseIcon fontSize="small" /> : <MenuIcon fontSize="small" />}
           </span>
-          <span className="smaj-menu-toggle-label">{isMobileMenuOpen ? "Close" : "Menu"}</span>
         </button>
         <nav className={`smaj-nav ${isMobileMenuOpen ? "smaj-nav-open" : ""}`} aria-label="Primary">
+          <button
+            type="button"
+            className="smaj-drawer-close"
+            aria-label="Close navigation menu"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            <span>Close</span>
+            <CloseIcon fontSize="small" />
+          </button>
           {navItems.map((item) => (
             <NavLink key={item.to} to={item.to}>
               {item.label}
@@ -91,7 +102,7 @@ const Header = () => {
             ) : (
               <button onClick={signIn} className="smaj-login-btn" disabled={isLoading}>
                 <span className="smaj-login-icon" aria-hidden="true">
-                  π
+                  <LoginIcon fontSize="small" />
                 </span>
                 <span className="smaj-login-text">{isLoading ? "Signing in..." : "Login with Pi"}</span>
               </button>
@@ -116,7 +127,10 @@ const Header = () => {
             </div>
           ) : (
             <button onClick={signIn} className="smaj-login-btn" disabled={isLoading}>
-              {isLoading ? "Signing in..." : "Login with Pi"}
+              <span className="smaj-login-icon" aria-hidden="true">
+                <LoginIcon fontSize="small" />
+              </span>
+              <span className="smaj-login-text">{isLoading ? "Signing in..." : "Login with Pi"}</span>
             </button>
           )}
         </div>
