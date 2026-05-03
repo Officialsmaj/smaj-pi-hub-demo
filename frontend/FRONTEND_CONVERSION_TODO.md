@@ -27,9 +27,9 @@ Goal: convert `smajpihub-convert-to-pi-net-docs` into the Vite React + TypeScrip
 ## Phase 4: Content/Page Conversion
 
 - [x] Convert `about`, `services`, `how-it-works`, `pricing`, `faq`, and `contact`.
-- [ ] Convert `community`, `developers`, `partners`, and legal pages.
-- [ ] Convert blog listing and blog post templates into typed content models.
-- [ ] Convert dashboard-related static pages into authenticated React views.
+- [x] Convert `community`, `developers`, `partners`, and legal pages.
+- [x] Convert blog listing and blog post templates into typed content models.
+- [x] Convert dashboard-related static pages into authenticated React views.
 
 ## Phase 5: Behavior and JS Logic
 

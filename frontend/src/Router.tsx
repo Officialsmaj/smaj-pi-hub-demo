@@ -10,6 +10,12 @@ import PricingPage from "./pages/PricingPage.tsx";
 import FaqPage from "./pages/FaqPage.tsx";
 import ContactPage from "./pages/ContactPage.tsx";
 import WhitePaperPage from "./pages/WhitePaperPage.tsx";
+import CommunityPage from "./pages/CommunityPage.tsx";
+import DevelopersPage from "./pages/DevelopersPage.tsx";
+import PartnersPage from "./pages/PartnersPage.tsx";
+import BlogPage from "./pages/BlogPage.tsx";
+import BlogPostPage from "./pages/BlogPostPage.tsx";
+import { CookiesPage, PrivacyPage, ReportAbusePage, TermsPage } from "./pages/LegalPages.tsx";
 
 export const router = createBrowserRouter(
   [
@@ -59,31 +65,39 @@ export const router = createBrowserRouter(
     },
     {
       path: "/partners",
-      element: <GenericPage title="Partners" description="Partners page conversion is in progress." />,
+      element: <PartnersPage />,
     },
     {
       path: "/community",
-      element: <GenericPage title="Community" description="Community page conversion is in progress." />,
+      element: <CommunityPage />,
     },
     {
       path: "/developers",
-      element: <GenericPage title="Developers" description="Developers page conversion is in progress." />,
+      element: <DevelopersPage />,
+    },
+    {
+      path: "/blog",
+      element: <BlogPage />,
+    },
+    {
+      path: "/blog/:slug",
+      element: <BlogPostPage />,
     },
     {
       path: "/privacy",
-      element: <GenericPage title="Privacy Policy" description="Privacy Policy page conversion is in progress." />,
+      element: <PrivacyPage />,
     },
     {
       path: "/terms",
-      element: <GenericPage title="Terms & Conditions" description="Terms page conversion is in progress." />,
+      element: <TermsPage />,
     },
     {
       path: "/cookies",
-      element: <GenericPage title="Cookie Policy" description="Cookie Policy page conversion is in progress." />,
+      element: <CookiesPage />,
     },
     {
       path: "/report-abuse",
-      element: <GenericPage title="Report Abuse" description="Report Abuse page conversion is in progress." />,
+      element: <ReportAbusePage />,
     },
     {
       path: "/engagement-tasks",
