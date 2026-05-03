@@ -66,6 +66,61 @@ h4, h5, h6 {
   color: #3f2a7f;
   font-size: 14px;
   font-weight: 600;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.smaj-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background: #6b3fe6;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s ease;
+}
+
+.smaj-nav a:hover::after {
+  transform: scaleX(1);
+}
+
+.smaj-nav a.active {
+  color: #6b3fe6;
+}
+
+.smaj-nav a.active::after {
+  transform: scaleX(1);
+}
+
+.smaj-menu-toggle {
+  display: none;
+  border: 1px solid #d8ccfb;
+  background: #fff;
+  color: #3f2a7f;
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.smaj-menu-toggle-icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.smaj-menu-toggle-label {
+  font-size: 14px;
+}
+
+.smaj-nav-overlay {
+  display: none;
+}
+
+.smaj-mobile-auth-sheet {
+  display: none;
 }
 
 .home-hero {
@@ -360,6 +415,168 @@ h4, h5, h6 {
   gap: 18px;
 }
 
+@media (max-width: 767px) {
+  .smaj-header-inner {
+    position: relative;
+  }
+
+  .smaj-menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    gap: 6px;
+  }
+
+  .smaj-nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background: #ffffff;
+    border-left: 1px solid #e8e2fb;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 72px 16px 24px;
+    z-index: 40;
+    transition: right 0.2s ease;
+    flex-wrap: nowrap;
+  }
+
+  .smaj-nav a {
+    padding: 11px 10px;
+    border-radius: 8px;
+    font-size: 0.98rem;
+  }
+
+  .smaj-nav-open {
+    right: 0;
+  }
+
+  .smaj-nav-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    border: 0;
+    background: rgba(20, 16, 35, 0.36);
+    z-index: 30;
+    cursor: pointer;
+  }
+
+  .smaj-auth-section {
+    display: none;
+  }
+
+  .smaj-mobile-auth-sheet {
+    margin-top: auto;
+    display: block;
+    border-top: 1px solid #ece5ff;
+    padding-top: 14px;
+  }
+
+  .smaj-mobile-auth-sheet .smaj-user-info {
+    display: grid;
+    gap: 10px;
+  }
+
+  .smaj-mobile-auth-sheet .smaj-login-btn,
+  .smaj-mobile-auth-sheet .smaj-signout-btn {
+    width: 100%;
+  }
+
+  .smaj-login-icon {
+    display: inline-flex;
+    margin-right: 6px;
+    font-weight: 700;
+  }
+
+  .smaj-login-text {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .smaj-header-inner {
+    position: relative;
+  }
+
+  .smaj-menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    gap: 8px;
+  }
+
+  .smaj-nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 320px;
+    height: 100vh;
+    background: #ffffff;
+    border-left: 1px solid #e8e2fb;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 78px 18px 28px;
+    z-index: 40;
+    transition: right 0.2s ease;
+    flex-wrap: nowrap;
+  }
+
+  .smaj-nav a {
+    padding: 14px 12px;
+    border-radius: 8px;
+    font-size: 1.15rem;
+  }
+
+  .smaj-nav-open {
+    right: 0;
+  }
+
+  .smaj-nav-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    border: 0;
+    background: rgba(20, 16, 35, 0.36);
+    z-index: 30;
+    cursor: pointer;
+  }
+
+  .smaj-auth-section {
+    display: none;
+  }
+
+  .smaj-mobile-auth-sheet {
+    margin-top: auto;
+    display: block;
+    border-top: 1px solid #ece5ff;
+    padding-top: 16px;
+  }
+
+  .smaj-mobile-auth-sheet .smaj-user-info {
+    display: grid;
+    gap: 10px;
+  }
+
+  .smaj-mobile-auth-sheet .smaj-login-btn,
+  .smaj-mobile-auth-sheet .smaj-signout-btn {
+    width: 100%;
+  }
+
+  .smaj-login-icon {
+    display: inline-flex;
+    margin-right: 6px;
+    font-weight: 700;
+  }
+}
+
 .smaj-footer h4 {
   margin: 0 0 10px;
   color: #ffffff;
@@ -387,15 +604,6 @@ h4, h5, h6 {
 }
 
 @media (max-width: 900px) {
-  .smaj-header-inner {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .smaj-nav {
-    width: 100%;
-  }
-
   .home-hero-grid {
     grid-template-columns: 1fr;
   }
@@ -417,6 +625,26 @@ h4, h5, h6 {
 
   .smaj-footer-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .smaj-menu-toggle {
+    display: none;
+  }
+
+  .smaj-nav {
+    position: static;
+    height: auto;
+    width: auto;
+    border: 0;
+    flex-direction: row;
+    padding: 0;
+    gap: 14px;
+  }
+
+  .smaj-auth-section {
+    display: block;
   }
 }
 
