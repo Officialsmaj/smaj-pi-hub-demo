@@ -34,9 +34,9 @@ Goal: convert `smajpihub-convert-to-pi-net-docs` into the Vite React + TypeScrip
 ## Phase 5: Behavior and JS Logic
 
 - [x] Port shared menu and interaction logic from vanilla JS into React hooks/components.
-- [ ] Port page-specific scripts (`faq`, `community`, `portfolio`, etc.) with typed state.
-- [ ] Remove direct DOM mutation patterns and replace with React state flow.
-- [ ] Add event tracking hooks for key CTA clicks.
+- [x] Port page-specific scripts (`faq`, `community`, `portfolio`, etc.) with typed state.
+- [x] Remove direct DOM mutation patterns and replace with React state flow.
+- [x] Add event tracking hooks for key CTA clicks.
 
 ## Phase 6: Pi Demo Integration
 

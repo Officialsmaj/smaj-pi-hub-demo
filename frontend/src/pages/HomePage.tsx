@@ -1,9 +1,12 @@
-  import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styles from "./HomePage.module.css";
 import AppLayout from "../layouts/AppLayout";
 import heroImage from "/smaj-hero.png";
+import { useEventTracking } from "../hooks/useEventTracking";
 
 const HomePage = () => {
+  const trackEvent = useEventTracking();
+
   return (
     <AppLayout>
       <main className={styles.homePage}>
@@ -17,8 +20,18 @@ const HomePage = () => {
                 more through Pi wallet access and expanding SMAJ Token utility.
               </p>
               <div className="home-hero-cta">
-                <Link to="/services">Platform Directory</Link>
-                <Link to="/white-paper">Read White Paper</Link>
+                <Link
+                  to="/services"
+                  onClick={() => trackEvent({ event: "home_cta_click", payload: { cta: "platform_directory" } })}
+                >
+                  Platform Directory
+                </Link>
+                <Link
+                  to="/white-paper"
+                  onClick={() => trackEvent({ event: "home_cta_click", payload: { cta: "read_white_paper" } })}
+                >
+                  Read White Paper
+                </Link>
               </div>
               <div className="home-proof">
                 <div>
