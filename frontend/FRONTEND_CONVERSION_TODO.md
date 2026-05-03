@@ -1,97 +1,128 @@
-# SMAJ PI HUB Frontend Conversion TODO
+# SMAJ PI HUB Frontend Implementation TODO (White Paper Aligned)
 
-Goal: convert `smajpihub-convert-to-pi-net-docs` into the Vite React + TypeScript frontend, starting with homepage-first delivery.
+Source of truth: `By_smaj_ecosystem_white_paper_v2.md` (Version 2.0, April 16, 2026)
 
-## Phase 1: Home Page Baseline
+Goal: implement the frontend roadmap, UX, and platform modules according to the SMAJ Ecosystem white paper across unified access, 15 integrated platforms, Pi-native payments, AI guidance, trust verification, and token utility surfaces.
 
-- [x] Keep current Pi brand color palette and core layout structure in React homepage.
-- [x] Port core homepage sections (`hero`, `services preview`, `highlights`, `trust`).
-- [x] Replace all remaining placeholder links with real React routes.
-- [ ] Add responsive QA checklist for mobile, tablet, and desktop.
+## Foundation: Unified Access, UX, and Frontend Core
 
-## Phase 2: App Shell and Routing
+- [x] Build React + TypeScript app shell with route-based navigation.
+- [x] Establish sticky header/footer and responsive navigation (mobile/tablet/desktop drawer behavior).
+- [x] Implement homepage as central gateway experience.
+- [x] Build reusable section/card/button component set.
+- [ ] Finish design-token standardization and remove remaining duplicated style patterns.
+- [ ] Complete responsive QA checklist for all key routes and interaction states.
 
-- [x] Create route map from legacy HTML pages to React routes.
-- [x] Add shared layout component for header/footer/nav.
-- [x] Add 404 page and safe redirects for old URLs.
-- [x] Ensure homepage redirects to `/home` (GitHub Pages subfolder support).
-- [ ] Update Header logo to link explicitly to `/home`.
+## White Paper Core Requirements
 
-## Phase 3: Style System Migration
+### 1. One Login, One Wallet, All Services
 
-- [ ] Extract design tokens (colors, spacing, radius, shadows) from legacy CSS.
-- [ ] Move repeated styles into reusable React-friendly CSS modules or styled components.
-- [ ] Keep visual parity first, then clean up duplicated CSS.
-- [x] Build a reusable section/card/button component set.
+- [x] Integrate Pi wallet authentication flow and session-aware header state.
+- [ ] Add unified account center page showing identity/verification status across modules.
+- [ ] Add cross-platform SSO guard utilities for all protected module routes.
 
-## Phase 4: Content/Page Conversion
+### 2. SMAJ AI Assistant (Platform Guidance Only)
 
-- [x] Convert `about`, `services`, `how-it-works`, `pricing`, `faq`, and `contact`.
-- [x] Convert `community`, `developers`, `partners`, and legal pages.
-- [x] Convert blog listing and blog post templates into typed content models.
-- [x] Convert dashboard-related static pages into authenticated React views.
+- [ ] Add AI assistant entrypoint in header and contextual page panels.
+- [ ] Build assistant UX for service discovery, workflow guidance, and in-platform recommendations.
+- [ ] Enforce guardrails so assistant is restricted to SMAJ platform support scope.
 
-## Phase 5: Behavior and JS Logic
+### 3. Pi-Native Pricing and Payments
 
-- [x] Port shared menu and interaction logic from vanilla JS into React hooks/components.
-- [x] Port page-specific scripts (`faq`, `community`, `portfolio`, etc.) with typed state.
-- [x] Remove direct DOM mutation patterns and replace with React state flow.
-- [x] Add event tracking hooks for key CTA clicks.
+- [ ] Ensure all commerce/service pricing UI defaults to Pi denomination.
+- [ ] Add consistent Pi payment status UI components (pending, approved, completed, failed).
+- [ ] Implement `createPayment` -> approval -> completion frontend flow states per module.
 
-## Phase 6: Pi Demo Integration
+### 4. Multi-Level Verification and Trust
 
-- [x] Wire Pi auth flow and wallet-aware session state. (Header implementation complete)
-- [x] Implement redirect/modal logic for `onIncompletePaymentFound` in Header.
-- [x] Add visual "Active" route indicators to the Mobile Navigation drawer.
-- [x] Add a User Profile dropdown menu (Logout/Profile) for authenticated users.
-- [x] Add loading states for the Login/Session check transition.
-- [ ] Connect storefront and engagement tasks to backend APIs.
-- [ ] Add typed API client layer and request error handling.
-- [ ] Add loading/empty/error states across all data views.
+- [ ] Create user trust tier UI (`Basic`, `Verified`, `Trusted Seller/Provider`).
+- [ ] Add KYB onboarding flow UI for providers and sellers.
+- [ ] Add trust badges, verification markers, and anti-fraud UX cues across listings and profiles.
 
-## Phase 7: Quality and Release
+### 5. Security and Marketplace Positioning
 
-- [ ] Add unit tests for core components and route guards.
-- [ ] Add integration tests for critical user flows.
-- [ ] Run Lighthouse and performance pass on homepage + top routes.
-- [ ] Prepare release checklist and deployment notes for Pi Demo frontend.
+- [ ] Add security messaging and transaction-signing confirmations in key payment screens.
+- [ ] Publish clear marketplace disclaimer components (non-custodial, non-banking role) across legal/help routes.
 
-## Responsive Breakpoint Completion
+## Platform Module Rollout (15 Integrated Platforms)
 
-Build Status: ✅ Successful (verified with `yarn build`)
+### Phase 1 (Q1–Q2 2026)
 
-Responsive Breakpoints:
+- [ ] SMAJ PI HUB: finalize gateway dashboard with module launch cards and live module status.
+- [ ] SMAJ STORE: implement frontend marketplace browsing, product detail, cart, checkout, and order tracking.
+- [ ] SMAJ FOOD DELIVERY: implement restaurant discovery, menu flow, order tracking, and loyalty UI.
+- [ ] Basic verification: surface initial trust verification onboarding and badges.
 
-| Breakpoint | Viewport Width | Hamburger | Drawer Width |
-| --- | --- | --- | --- |
-| Mobile | `< 768px` | ✅ Visible | `280px` |
-| Tablet | `768px-1023px` | ✅ Visible | `320px` |
-| Desktop | `≥ 1024px` | ❌ Hidden | N/A |
+### Phase 2 (Q3 2026)
 
-Key Features Implemented:
+- [ ] SMAJ PI JOBS: launch jobs/freelance listings, proposals, and milestone/payment tracking UI.
+- [ ] SMAJ PI AGRO: launch farmer/buyer/supplier marketplace flows.
+- [ ] Enhanced provider/seller verification UX for new modules.
 
-1. Viewport Detection (`Header.tsx`)
-- Auto-close menu when resizing to desktop (`≥ 1024px`)
-- Prevent body scroll when mobile menu is open via `document.body.style.overflow`
-- Resize listener to detect viewport changes
+### Phase 3 (Q4 2026)
 
-2. Mobile Drawer Styling (`@media max-width: 767px`)
-- `280px` drawer width, slides from right
-- Compact navigation links with hover states
-- Bottom sheet user auth section for mobile
-- Hidden login text, icon-focused login affordance
+- [ ] SMAJ PI HEALTH: launch telemedicine booking and provider directory UI.
+- [ ] SMAJ PI EDU: launch course catalog, certification display, and learner progress views.
+- [ ] SMAJ PI HOUSING: launch verified listing marketplace with secure deposit/escrow states.
+- [ ] Expand AI guidance touchpoints for health/education/housing workflows.
 
-3. Tablet Drawer Styling (`@media 768px-1023px`)
-- `320px` drawer width (wider for tablets)
-- Larger font size (`1.15rem`) and touch targets
-- Enhanced padding for tablet use
+### Phase 4 (Q1 2027)
 
-4. Desktop Navigation (`@media 1024px+`)
-- Full horizontal nav bar with underline hover animation
-- Hamburger hidden, menu always visible
+- [ ] SMAJ PI TRANSPORT: launch transport booking and trip status interface.
+- [ ] SMAJ PI EVENTS: launch event discovery, booking, and organizer verification flows.
+- [ ] SMAJ PI CHARITY: launch verified NGO discovery, donation flow, and impact reporting views.
+- [ ] Strengthen recommendation interfaces for cross-module engagement.
 
-Responsive Behavior Summary:
-- Mobile (`<768px`): Tap hamburger → drawer slides in from right → overlay covers content → body scroll locked
-- Tablet (`768px-1023px`): Same behavior with wider drawer (`320px`) for better tablet UX
-- Desktop (`≥1024px`): Horizontal nav always visible, hamburger hidden
-- Resize Handling: If menu is open and viewport reaches desktop width, menu auto-closes
+### Phase 5 (Q2 2027)
+
+- [ ] SMAJ PI STREAM: launch content browsing and media experience surfaces.
+- [ ] SMAJ PI SPORTS: launch sports feed, scores, and fan engagement interfaces.
+- [ ] SMAJ PI SWAP: launch peer-to-peer exchange listing and trade flow UX.
+- [ ] Add first SMAJ Token utility surfaces (cashback/reward/discount indicators).
+
+### Phase 6 (Q3–Q4 2027)
+
+- [ ] SMAJ PI ENERGY: launch utility payment and usage tracking module UX.
+- [ ] Expand SMAJ Token governance and staking UI modules.
+- [ ] Add global scaling UX readiness (localization, regional content, module availability states).
+
+## Technical Architecture Alignment
+
+### Pi Network Integration Layer
+
+- [ ] Standardize Pi Browser compatibility checks and fallback messaging.
+- [ ] Implement reusable frontend hooks for Pi payment callbacks and verification states.
+
+### Modular Service Layer
+
+- [ ] Split module features into shared frontend contracts and per-module route boundaries.
+- [ ] Add module health/loading/error boundaries for resilient cross-module UX.
+
+### Developer and API Layer
+
+- [ ] Build typed API client layer for all modules.
+- [ ] Add consistent request error, retry, and empty-state handling.
+- [ ] Prepare frontend API docs/readme for third-party integration handoff.
+
+## Token Utility and Governance Surfaces
+
+- [ ] Add staking dashboard UI shells.
+- [ ] Add governance voting interface shells.
+- [ ] Add loyalty/cashback ledger UI.
+- [ ] Add fee discount visibility in checkout and service payments.
+
+## Legal, Risk, and Compliance Content
+
+- [x] Convert legal route placeholders to React pages.
+- [ ] Update legal copy to match white paper disclaimer language and risk statements.
+- [ ] Add clear token/marketplace informational disclaimers near token utility pages.
+
+## Quality, Observability, and Release
+
+- [x] Port page-level legacy JS interactions to React state flow.
+- [x] Add event tracking hooks for CTA actions.
+- [ ] Expand analytics schema to module-level product events (browse, checkout, conversion, trust events).
+- [ ] Add unit tests for shared components, route guards, and auth/payment hooks.
+- [ ] Add integration tests for wallet login + payment + module navigation critical paths.
+- [ ] Run Lighthouse/performance audits on gateway and top module routes.
+- [ ] Prepare release checklist and deployment notes per rollout phase.
