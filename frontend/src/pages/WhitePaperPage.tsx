@@ -40,7 +40,7 @@ const WhitePaperPage = () => {
                 with wallet-first access, verified identity, and multi-service utility.
               </p>
               <div className="home-hero-cta">
-                <a href="/docs/SMAJ_ECOSYSTEM_White_Paper_v2.0.pdf" target="_blank" rel="noreferrer">
+                <a href="/SMAJ_ECOSYSTEM_White_Paper_v2.0.pdf" target="_blank" rel="noreferrer">
                   Open PDF v2.0
                 </a>
                 <Link to="/services">Explore Platforms</Link>

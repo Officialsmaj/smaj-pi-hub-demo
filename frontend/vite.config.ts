@@ -5,6 +5,7 @@ import * as path from "node:path";
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
+  const isPublicBuild = mode === "public";
   return {
     base: "/smajpihub/",
     plugins: [
@@ -23,6 +24,14 @@ export default defineConfig(({ mode }) => {
         "@mui/styled-engine": path.resolve(__dirname, "node_modules/@mui/styled-engine-sc"),
       },
     },
+    build: isPublicBuild
+      ? {
+          // Publish directly to repository root for single public deploy output.
+          outDir: "../",
+          assetsDir: "assets",
+          emptyOutDir: false,
+        }
+      : undefined,
     server: {
       port: parseInt(env.PORT) || 3314,
     },
