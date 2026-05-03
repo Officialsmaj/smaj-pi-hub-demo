@@ -197,6 +197,12 @@ h4, h5, h6 {
   color: #b63636;
 }
 
+.smaj-header-feedback {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 6px 16px 10px;
+}
+
 .home-hero {
   margin-top: 16px;
   background: linear-gradient(135deg, #ffffff, #f1ebff);
@@ -505,19 +511,21 @@ h4, h5, h6 {
   .smaj-nav {
     position: fixed;
     top: 0;
+    bottom: 0;
     right: -100%;
     width: 280px;
-    height: 100vh;
+    height: 100dvh;
     background: #ffffff;
     border-left: 1px solid #e8e2fb;
     display: flex;
     flex-direction: column;
     align-items: stretch;
     gap: 0;
-    padding: 72px 16px 24px;
+    padding: 12px 16px 0;
     z-index: 40;
     transition: right 0.2s ease;
     flex-wrap: nowrap;
+    overflow-y: auto;
   }
 
   .smaj-nav a {
@@ -532,7 +540,7 @@ h4, h5, h6 {
     justify-content: center;
     align-self: flex-end;
     gap: 6px;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     border: 1px solid #d8ccfb;
     background: #fff;
     color: #3f2a7f;
@@ -561,10 +569,11 @@ h4, h5, h6 {
   }
 
   .smaj-mobile-auth-sheet {
-    margin-top: auto;
+    margin-top: 12px;
     display: block;
     border-top: 1px solid #ece5ff;
-    padding-top: 14px;
+    padding-top: 12px;
+    padding-bottom: 0;
   }
 
   .smaj-mobile-auth-sheet .smaj-auth-feedback {
@@ -602,19 +611,21 @@ h4, h5, h6 {
   .smaj-nav {
     position: fixed;
     top: 0;
+    bottom: 0;
     right: -100%;
     width: 320px;
-    height: 100vh;
+    height: 100dvh;
     background: #ffffff;
     border-left: 1px solid #e8e2fb;
     display: flex;
     flex-direction: column;
     align-items: stretch;
     gap: 0;
-    padding: 78px 18px 28px;
+    padding: 12px 18px 0;
     z-index: 40;
     transition: right 0.2s ease;
     flex-wrap: nowrap;
+    overflow-y: auto;
   }
 
   .smaj-nav a {
@@ -629,7 +640,7 @@ h4, h5, h6 {
     justify-content: center;
     align-self: flex-end;
     gap: 6px;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
     border: 1px solid #d8ccfb;
     background: #fff;
     color: #3f2a7f;
@@ -658,10 +669,11 @@ h4, h5, h6 {
   }
 
   .smaj-mobile-auth-sheet {
-    margin-top: auto;
+    margin-top: 12px;
     display: block;
     border-top: 1px solid #ece5ff;
-    padding-top: 16px;
+    padding-top: 12px;
+    padding-bottom: 0;
   }
 
   .smaj-mobile-auth-sheet .smaj-auth-feedback {

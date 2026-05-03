@@ -121,9 +121,6 @@ const Header = () => {
           />
         ) : null}
         <div className="smaj-auth-section">
-          {authFeedback ? (
-            <p className={`smaj-auth-feedback smaj-auth-feedback-${authFeedback.type}`}>{authFeedback.message}</p>
-          ) : null}
           {isAuthenticated && user ? (
             <div className="smaj-user-info">
               <span className="smaj-username">{user.username}</span>
@@ -141,6 +138,11 @@ const Header = () => {
           )}
         </div>
       </div>
+      {authFeedback ? (
+        <p className={`smaj-header-feedback smaj-auth-feedback smaj-auth-feedback-${authFeedback.type}`}>
+          {authFeedback.message}
+        </p>
+      ) : null}
     </header>
   );
 };
