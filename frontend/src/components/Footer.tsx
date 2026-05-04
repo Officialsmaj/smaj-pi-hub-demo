@@ -50,7 +50,11 @@ const Footer = () => {
           <Link to="/report-abuse"><ReportGmailerrorredOutlinedIcon fontSize="small" />Report Abuse</Link>
         </div>
       </div>
-      <p className="smaj-copyright">&copy; 2026 SMAJ PI HUB. All rights reserved.</p>
+<p className="smaj-copyright">&copy; 2026 SMAJ PI HUB. All rights reserved.</p>
+      <p className="smaj-powered-by" style={{textAlign: 'center', marginTop: '1rem', fontSize: '0.875rem', color: '#6b7280', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem'}}>
+        <span style={{fontWeight: 'bold', fontSize: '1rem'}}>⚡</span>
+        <span>Part of the SMAJ Ecosystem • Powered by SMAJ</span>
+      </p>
     </footer>
   );
 };
