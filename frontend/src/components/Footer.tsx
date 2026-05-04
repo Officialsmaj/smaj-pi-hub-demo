@@ -58,7 +58,7 @@ const Footer = () => {
           <img src={smajEcosystemLogo} alt="SMAJ Ecosystem Logo" className={styles.logoImg} />
         </a>
         <p className={styles.poweredText}>
-          <span style={{ fontWeight: 'bold', fontSize: '1rem' }}>⚡</span>
+          <span style={{ fontWeight: 'bold', fontSize: '1rem' }}></span>
           <span>Part of the SMAJ Ecosystem • Powered by SMAJ</span>
         </p>
       </div>
