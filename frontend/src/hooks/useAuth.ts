@@ -37,7 +37,7 @@ const toErrorMessage = (err: unknown) => {
 export const useAuth = () => {
   const [user, setUser] = useState<User | null>(null);
   const [showSignIn, setShowSignIn] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // Initialize as true for initial session check
   const [authFeedback, setAuthFeedback] = useState<AuthFeedback | null>(null);
 
   useEffect(() => {
@@ -46,6 +46,25 @@ export const useAuth = () => {
       return () => clearTimeout(timer);
     }
   }, [authFeedback]);
+
+  // Effect for initial session check
+  useEffect(() => {
+    const checkSession = async () => {
+      try {
+        // Assuming /user endpoint returns current user if logged in
+        const response = await axiosClient.get("/user");
+        if (response.data?.user) {
+          setUser(response.data.user);
+        }
+      } catch (err) {
+        // No active session found or backend unreachable, user remains null
+        console.log("No active session found or error checking session:", err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    checkSession();
+  }, []); // Run once on mount
 
   const onIncompletePaymentFound = useCallback(async (payment: PaymentDTO) => {
     try {
@@ -64,6 +83,7 @@ export const useAuth = () => {
     } catch (err) {
       console.error("Error signing in:", err);
       setAuthFeedback({ type: "error", message: toErrorMessage(err) });
+      throw err; // Re-throw to allow `signIn` to catch and handle loading/feedback
     }
   }, []);
 

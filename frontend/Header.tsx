@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios'; // No longer needed as auth logic is centralized in useAuth
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import BoltIcon from '@mui/icons-material/Bolt';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import styles from './Header.module.css';
+import { useAuth } from './src/hooks/useAuth'; // Import the useAuth hook
 
 const Header: React.FC = () => {
+  const { user, isLoading, signIn, signOut } = useAuth(); // Use the auth hook
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-  const [user, setUser] = useState<{ username: string } | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const toggleUserMenu = () => setIsUserMenuOpen(!isUserMenuOpen);
@@ -47,62 +47,16 @@ const Header: React.FC = () => {
     };
   }, [isMenuOpen]);
 
-  // Check for existing session on mount
-  useEffect(() => {
-    const checkSession = async () => {
-      try {
-        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/user`, { withCredentials: true });
-        if (response.data?.user) {
-          setUser(response.data.user);
-        }
-      } catch (err) {
-        // No active session found or backend unreachable
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    checkSession();
-  }, []);
-
-  const onIncompletePaymentFound = async (payment: any) => {
-    console.log('Incomplete payment found:', payment);
-    try {
-      await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/incomplete`,
-        { payment },
-        { withCredentials: true }
-      );
-    } catch (err) {
-      console.error('Failed to handle incomplete payment:', err);
-    }
-  };
-
+  // Replaced with signIn from useAuth
   const handlePiLogin = async () => {
-    try {
-      const scopes = ['username', 'payments'];
-
-      const authResponse = await window.Pi.authenticate(scopes, onIncompletePaymentFound);
-      
-      await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/signin`, 
-        { auth: authResponse }, 
-        { withCredentials: true }
-      );
-      setUser(authResponse.user);
-      console.log('Pi Auth Success:', authResponse);
-    } catch (err) {
-      console.error('Pi Authentication failed:', err);
-    }
+    closeMenu(); // Close mobile menu if open
+    await signIn(); // Call signIn from useAuth
   };
 
+  // Replaced with signOut from useAuth
   const handleLogout = async () => {
-    try {
-      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/logout`, {}, { withCredentials: true });
-      setUser(null);
-      closeMenu();
-    } catch (err) {
-      console.error('Logout failed:', err);
-    }
+    await signOut(); // Call signOut from useAuth
+    closeMenu();
   };
 
   return (
