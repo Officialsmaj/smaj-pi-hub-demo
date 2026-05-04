@@ -1,5 +1,5 @@
 import { AxiosError } from "axios";
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import { axiosClient } from "../lib/axiosClient";
 import type { AuthResult, PaymentDTO, User } from "../types/pi";
 
@@ -39,6 +39,13 @@ export const useAuth = () => {
   const [showSignIn, setShowSignIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [authFeedback, setAuthFeedback] = useState<AuthFeedback | null>(null);
+
+  useEffect(() => {
+    if (authFeedback) {
+      const timer = setTimeout(() => setAuthFeedback(null), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [authFeedback]);
 
   const onIncompletePaymentFound = useCallback(async (payment: PaymentDTO) => {
     try {
