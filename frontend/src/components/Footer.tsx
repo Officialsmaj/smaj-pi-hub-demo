@@ -15,6 +15,8 @@ import PrivacyTipOutlinedIcon from "@mui/icons-material/PrivacyTipOutlined";
 import GavelOutlinedIcon from "@mui/icons-material/GavelOutlined";
 import CookieOutlinedIcon from "@mui/icons-material/CookieOutlined";
 import ReportGmailerrorredOutlinedIcon from "@mui/icons-material/ReportGmailerrorredOutlined";
+import smajEcosystemLogo from "../../../smaj_ecosystem_logo.png";
+import styles from "./Footer.module.css";
 
 const Footer = () => {
   return (
@@ -51,10 +53,15 @@ const Footer = () => {
         </div>
       </div>
 <p className="smaj-copyright">&copy; 2026 SMAJ PI HUB. All rights reserved.</p>
-      <p className="smaj-powered-by" style={{textAlign: 'center', marginTop: '1rem', fontSize: '0.875rem', color: '#6b7280', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem'}}>
-        <span style={{fontWeight: 'bold', fontSize: '1rem'}}>⚡</span>
-        <span>Part of the SMAJ Ecosystem • Powered by SMAJ</span>
-      </p>
+      <div className={styles.poweredBy}>
+        <a href="/" className={styles.logoLink} aria-label="SMAJ Ecosystem">
+          <img src={smajEcosystemLogo} alt="SMAJ Ecosystem Logo" className={styles.logoImg} />
+        </a>
+        <p className={styles.poweredText}>
+          <span style={{ fontWeight: 'bold', fontSize: '1rem' }}>⚡</span>
+          <span>Part of the SMAJ Ecosystem • Powered by SMAJ</span>
+        </p>
+      </div>
     </footer>
   );
 };
