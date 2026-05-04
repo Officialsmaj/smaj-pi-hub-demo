@@ -1,5 +1,7 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import Tooltip from "@mui/material/Tooltip"; // Import Tooltip
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import DesignServicesOutlinedIcon from "@mui/icons-material/DesignServicesOutlined";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
@@ -15,13 +17,36 @@ import PrivacyTipOutlinedIcon from "@mui/icons-material/PrivacyTipOutlined";
 import GavelOutlinedIcon from "@mui/icons-material/GavelOutlined";
 import CookieOutlinedIcon from "@mui/icons-material/CookieOutlined";
 import ReportGmailerrorredOutlinedIcon from "@mui/icons-material/ReportGmailerrorredOutlined";
+import ArrowUpwardOutlinedIcon from "@mui/icons-material/ArrowUpwardOutlined";
 import smajEcosystemLogo from "../../../smaj_ecosystem_logo.png";
 import styles from "./Footer.module.css";
 
 const Footer = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const toggleVisibility = () => {
+      if (window.scrollY > 300) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener("scroll", toggleVisibility);
+    return () => window.removeEventListener("scroll", toggleVisibility);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
-    <footer className="smaj-footer">
-      <div className="smaj-footer-grid">
+    <footer className={styles.footer}>
+      <div className={styles.footerGrid}>
         <div>
           <h4>SMAJ PI HUB</h4>
           <p>Built for Pi wallet access, with SMAJ Token utility expanding across the ecosystem.</p>
@@ -52,16 +77,27 @@ const Footer = () => {
           <Link to="/report-abuse"><ReportGmailerrorredOutlinedIcon fontSize="small" />Report Abuse</Link>
         </div>
       </div>
-<p className="smaj-copyright">&copy; 2026 SMAJ PI HUB. All rights reserved.</p>
+      <p className={styles.copyright}>&copy; 2026 SMAJ PI HUB. All rights reserved.</p>
       <div className={styles.poweredBy}>
         <a href="/" className={styles.logoLink} aria-label="SMAJ Ecosystem">
           <img src={smajEcosystemLogo} alt="SMAJ Ecosystem Logo" className={styles.logoImg} />
         </a>
         <p className={styles.poweredText}>
-          <span style={{ fontWeight: 'bold', fontSize: '1rem' }}></span>
+          <span style={{ fontWeight: 'bold', fontSize: '1rem' }}>⚡</span>
           <span>Part of the SMAJ Ecosystem • Powered by SMAJ</span>
         </p>
       </div>
+
+      <Tooltip title="Scroll to top" placement="left">
+        <button
+          type="button"
+          onClick={scrollToTop}
+          className={`${styles.scrollToTop} ${isVisible ? styles.visible : ""}`}
+          aria-label="Scroll to top"
+        >
+          <ArrowUpwardOutlinedIcon />
+        </button>
+      </Tooltip>
     </footer>
   );
 };
