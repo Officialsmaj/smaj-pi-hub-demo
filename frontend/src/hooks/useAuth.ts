@@ -81,8 +81,6 @@ export const useAuth = () => {
       setShowSignIn(false);
       setAuthFeedback({ type: "success", message: `Signed in as ${authResult.user.username}.` });
     } catch (err) {
-      console.error("Error signing in:", err);
-      setAuthFeedback({ type: "error", message: toErrorMessage(err) });
       throw err; // Re-throw to allow `signIn` to catch and handle loading/feedback
     }
   }, []);
@@ -102,8 +100,13 @@ export const useAuth = () => {
       const authResult = await window.Pi.authenticate(scopes, onIncompletePaymentFound);
       await signInUser(authResult);
     } catch (err) {
-      console.error("Error authenticating:", err);
-      setAuthFeedback({ type: "error", message: "Authentication was cancelled or failed in Pi Browser." });
+      console.error("Sign-in process failed:", err);
+      // Only show generic Pi Browser error if it's not a backend Axios error
+      if ((err as any).isAxiosError || (err as AxiosError).response) {
+        setAuthFeedback({ type: "error", message: toErrorMessage(err) });
+      } else {
+        setAuthFeedback({ type: "error", message: "Authentication was cancelled or failed in Pi Browser." });
+      }
     } finally {
       setIsLoading(false);
     }
@@ -116,8 +119,8 @@ export const useAuth = () => {
       setUser(null);
       setAuthFeedback({ type: "success", message: "Signed out successfully." });
     } catch (err) {
-      console.error("Error signing out:", err);
-      setAuthFeedback({ type: "error", message: "Sign out failed. Please try again." });
+      console.error("Sign-out failed:", err);
+      setAuthFeedback({ type: "error", message: "Failed to sign out." });
     } finally {
       setIsLoading(false);
     }
