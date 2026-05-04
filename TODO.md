@@ -42,7 +42,8 @@
 - [ ] Add event tracking hooks for key CTA clicks.
 
 ### Phase 6: Pi Demo Integration
-- [ ] Wire Pi auth flow and wallet-aware session state.
+- [x] Wire Pi auth flow and wallet-aware session state.
+- [ ] Debug Pi login 405: Check backend logs ("POST /user/signin HIT?"), frontend Network tab (exact URL/status), VITE_BACKEND_URL config. Pi /me verification.
 - [ ] Connect storefront and engagement tasks to backend APIs.
 - [ ] Add typed API client layer and request error handling.
 - [ ] Add loading/empty/error states across all data views.
