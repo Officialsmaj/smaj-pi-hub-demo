@@ -15,6 +15,7 @@ if (result.error) {
 }
 
 interface Environment {
+  sandbox_sdk: boolean;
   port: number;
   session_secret: string;
   pi_api_key: string;
@@ -26,11 +27,15 @@ interface Environment {
   frontend_url: string;
 }
 
+const sandboxSDK = String(process.env.SANDBOX_SDK || "false").toLowerCase() === "true";
+
 const env: Environment = {
+  sandbox_sdk: sandboxSDK,
   port: parseInt(process.env.PORT || "8000"),
   session_secret: process.env.SESSION_SECRET || "This is my session secret",
   pi_api_key: process.env.PI_API_KEY || "",
-  platform_api_url: process.env.PLATFORM_API_URL || "",
+  platform_api_url:
+    process.env.PLATFORM_API_URL || (sandboxSDK ? "https://api.sandbox.minepi.com" : "https://api.minepi.com"),
   mongo_host: process.env.MONGO_HOST || "localhost:27017",
   mongo_db_name: process.env.MONGODB_DATABASE_NAME || "demo-app",
   mongo_user: process.env.MONGODB_USERNAME || "",
@@ -39,3 +44,8 @@ const env: Environment = {
 };
 
 export default env;
+
+
+if (env.sandbox_sdk && env.platform_api_url.includes("api.minepi.com")) {
+  console.warn("WARNING: SANDBOX_SDK=true but PLATFORM_API_URL points to production Pi API. Use https://api.sandbox.minepi.com");
+}
