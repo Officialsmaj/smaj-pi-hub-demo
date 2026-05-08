@@ -19,6 +19,7 @@ try {
       // Verify the user's access token with the /me endpoint:
       console.log("Calling Pi /me with token...");
       const me = await platformAPIClient.get(`/v2/me`, { headers: { Authorization: `Bearer ${auth.accessToken}` } });
+
       console.log("Pi /me response:", me.status, me.data?.username || "no username");
     } catch (err) {
       console.error("Error verifying access token:", err);
