@@ -41,24 +41,90 @@
   color: #673ab7;
 }
 
-.copyright {
-  text-align: center;
-  margin-top: 4rem;
+.footerBottomBar {
+  max-width: 1200px;
+  margin: 4rem auto 0;
   padding-top: 2rem;
   border-top: 1px solid #f0f0f0;
-  color: #999;
-  font-size: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1.25rem;
 }
+
+.copyright {
+  text-align: center;
+  color: #999;
+  font-size: 0.82rem;
+  margin: 0;
+}
+
+.legalLinksRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  font-size: 0.75rem;
+}
+
+.legalSeparator {
+  color: #c0c0c0;
+  font-size: 0.75rem;
+}
+
+.legalLinksRow a {
+  color: #444;
+  text-decoration: none;
+  font-size: 0.75rem;
+  transition: color 0.2s;
+}
+
+.legalLinksRow a:hover {
+  color: #673ab7;
+}
+
+.socialRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  margin-top: 0.9rem;
+}
+
+
+.socialIcon {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  color: #444;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.socialIcon:hover {
+  background-color: #673ab7;
+  border-color: #673ab7;
+  color: #fff;
+}
+
 
 .poweredBy {
   text-align: center;
-  margin-top: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
 }
+
 
 .logoLink {
   display: inline-block;

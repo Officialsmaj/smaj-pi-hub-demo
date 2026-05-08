@@ -3,6 +3,12 @@ import { Link } from "react-router-dom";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import Tooltip from "@mui/material/Tooltip"; // Import Tooltip
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import XIcon from "@mui/icons-material/X";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import TelegramIcon from "@mui/icons-material/Telegram";
+
 import DesignServicesOutlinedIcon from "@mui/icons-material/DesignServicesOutlined";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 import SellOutlinedIcon from "@mui/icons-material/SellOutlined";
@@ -13,10 +19,6 @@ import Diversity3OutlinedIcon from "@mui/icons-material/Diversity3Outlined";
 import HandshakeOutlinedIcon from "@mui/icons-material/HandshakeOutlined";
 import ForumOutlinedIcon from "@mui/icons-material/ForumOutlined";
 import CodeOutlinedIcon from "@mui/icons-material/CodeOutlined";
-import PrivacyTipOutlinedIcon from "@mui/icons-material/PrivacyTipOutlined";
-import GavelOutlinedIcon from "@mui/icons-material/GavelOutlined";
-import CookieOutlinedIcon from "@mui/icons-material/CookieOutlined";
-import ReportGmailerrorredOutlinedIcon from "@mui/icons-material/ReportGmailerrorredOutlined";
 import ArrowUpwardOutlinedIcon from "@mui/icons-material/ArrowUpwardOutlined";
 import smajEcosystemLogo from "../../../smaj_ecosystem_logo.png";
 import styles from "./Footer.module.css";
@@ -70,23 +72,56 @@ const Footer = () => {
           <Link to="/developers"><CodeOutlinedIcon fontSize="small" />Developers</Link>
         </div>
         <div>
-          <h4>Legal</h4>
-          <Link to="/privacy"><PrivacyTipOutlinedIcon fontSize="small" />Privacy Policy</Link>
-          <Link to="/terms"><GavelOutlinedIcon fontSize="small" />Terms & Conditions</Link>
-          <Link to="/cookies"><CookieOutlinedIcon fontSize="small" />Cookie Policy</Link>
-          <Link to="/report-abuse"><ReportGmailerrorredOutlinedIcon fontSize="small" />Report Abuse</Link>
+          <h4>Social</h4>
+          <div className={styles.socialRow} aria-label="Social links">
+            <a className={styles.socialIcon} href="/" aria-label="Facebook">
+              <FacebookIcon fontSize="small" />
+            </a>
+            <a className={styles.socialIcon} href="/" aria-label="Instagram">
+              <InstagramIcon fontSize="small" />
+            </a>
+            <a className={styles.socialIcon} href="/" aria-label="X">
+              <XIcon fontSize="small" />
+            </a>
+            <a className={styles.socialIcon} href="/" aria-label="YouTube">
+              <YouTubeIcon fontSize="small" />
+            </a>
+            <a className={styles.socialIcon} href="/" aria-label="Telegram">
+              <TelegramIcon fontSize="small" />
+            </a>
+          </div>
         </div>
+
+
+
       </div>
-      <p className={styles.copyright}>&copy; 2026 SMAJ PI HUB. All rights reserved.</p>
-      <div className={styles.poweredBy}>
-        <a href="/" className={styles.logoLink} aria-label="SMAJ Ecosystem">
-          <img src={smajEcosystemLogo} alt="SMAJ Ecosystem Logo" className={styles.logoImg} />
-        </a>
-        <p className={styles.poweredText}>
-          <span style={{ fontWeight: 'bold', fontSize: '1rem' }}></span>
-          <span>Part of the SMAJ Ecosystem • Powered by SMAJ</span>
-        </p>
+
+      <div className={styles.footerBottomBar}>
+        <div className={styles.poweredBy}>
+          <a href="/" className={styles.logoLink} aria-label="SMAJ Ecosystem">
+            <img src={smajEcosystemLogo} alt="SMAJ Ecosystem Logo" className={styles.logoImg} />
+          </a>
+          <p className={styles.poweredText}>
+            <span style={{ fontWeight: "bold", fontSize: "1rem" }}></span>
+            <span>Part of the SMAJ Ecosystem • Powered by SMAJ</span>
+          </p>
+        </div>
+
+        <div className={styles.legalLinksRow}>
+          <Link to="/privacy">Privacy Policy</Link>
+          <span className={styles.legalSeparator}>|</span>
+          <Link to="/terms">Terms & Conditions</Link>
+          <span className={styles.legalSeparator}>|</span>
+          <Link to="/cookies">Cookie Policy</Link>
+          <span className={styles.legalSeparator}>|</span>
+          <Link to="/report-abuse">Report Abuse</Link>
+        </div>
+
+
+        <p className={styles.copyright}>&copy; 2026 SMAJ PI HUB. All rights reserved.</p>
+
       </div>
+
 
       <Tooltip title="Scroll to top" placement="left">
         <button
