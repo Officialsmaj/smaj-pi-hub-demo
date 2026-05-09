@@ -16,6 +16,7 @@ import PartnersPage from "./pages/PartnersPage.tsx";
 import BlogPage from "./pages/BlogPage.tsx";
 import BlogPostPage from "./pages/BlogPostPage.tsx";
 import { CookiesPage, PrivacyPage, ReportAbusePage, TermsPage } from "./pages/LegalPages.tsx";
+import { platformDefinitions } from "./content/platforms";
 
 export const router = createBrowserRouter(
   [
@@ -54,6 +55,75 @@ export const router = createBrowserRouter(
     {
       path: "/contact",
       element: <ContactPage />,
+    },
+    ...platformDefinitions.map((platform) => ({
+      path: `/services/${platform.routeSegment}`,
+      element: (
+        <GenericPage
+          title={platform.name}
+          description={`${platform.description} Access with one Pi wallet login through SMAJ PI HUB.`}
+        />
+      ),
+    })),
+    {
+      path: "/smaj-store",
+      element: <Navigate to="/services/store" replace />,
+    },
+    {
+      path: "/smaj-food-delivery",
+      element: <Navigate to="/services/food" replace />,
+    },
+    {
+      path: "/smaj-pi-jobs",
+      element: <Navigate to="/services/jobs" replace />,
+    },
+    {
+      path: "/smaj-pi-health",
+      element: <Navigate to="/services/health" replace />,
+    },
+    {
+      path: "/smaj-pi-edu",
+      element: <Navigate to="/services/edu" replace />,
+    },
+    {
+      path: "/smaj-pi-transport",
+      element: <Navigate to="/services/transport" replace />,
+    },
+    {
+      path: "/smaj-pi-agro",
+      element: <Navigate to="/services/agro" replace />,
+    },
+    {
+      path: "/smaj-pi-energy",
+      element: <Navigate to="/services/energy" replace />,
+    },
+    {
+      path: "/smaj-pi-charity",
+      element: <Navigate to="/services/charity" replace />,
+    },
+    {
+      path: "/smaj-pi-housing",
+      element: <Navigate to="/services/housing" replace />,
+    },
+    {
+      path: "/smaj-pi-events",
+      element: <Navigate to="/services/events" replace />,
+    },
+    {
+      path: "/smaj-pi-swap",
+      element: <Navigate to="/services/swap" replace />,
+    },
+    {
+      path: "/smaj-pi-stream",
+      element: <Navigate to="/services/stream" replace />,
+    },
+    {
+      path: "/smaj-pi-sports",
+      element: <Navigate to="/services/sports" replace />,
+    },
+    {
+      path: "/smaj-token",
+      element: <Navigate to="/services/token" replace />,
     },
     {
       path: "/affiliate",

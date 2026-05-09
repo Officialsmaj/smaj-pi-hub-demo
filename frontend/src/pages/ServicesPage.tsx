@@ -2,15 +2,7 @@ import AppLayout from "../layouts/AppLayout";
 import Card from "../components/Card";
 import Section from "../components/Section";
 import ActionButton from "../components/ActionButton";
-
-const platforms = [
-  ["SMAJ STORE", "Shop products and services with Pi.", "Ready Now"],
-  ["SMAJ PI JOBS", "Find jobs and freelance opportunities.", "Coming Soon"],
-  ["SMAJ PI HEALTH", "Book care and medical services.", "Coming Soon"],
-  ["SMAJ PI EDU", "Learn skills from trusted mentors.", "Coming Soon"],
-  ["SMAJ PI TRANSPORT", "Access mobility and ride services.", "Coming Soon"],
-  ["SMAJ PI HOUSING", "Browse rental and housing options.", "Coming Soon"],
-];
+import { platformDefinitions } from "../content/platforms";
 
 const ServicesPage = () => {
   return (
@@ -21,10 +13,7 @@ const ServicesPage = () => {
             <div>
               <span className="home-kicker">ALL-IN-ONE PI SERVICE HUB</span>
               <h1>Access Every SMAJ Platform From One Place</h1>
-              <p>
-                Connect your wallet once and unlock ecosystem projects including e-commerce, digital services, and
-                upcoming tools.
-              </p>
+              <p>Connect your wallet once and unlock all 15 SMAJ ecosystem platforms from one trusted gateway.</p>
               <div className="home-hero-cta">
                 <ActionButton href="https://officialsmaj.github.io/smaj-ecosystem-dashboard/">
                   Open Unified Dashboard
@@ -43,10 +32,15 @@ const ServicesPage = () => {
 
         <Section className="home-section" title="Platform Directory" description="Choose where to go next.">
           <div className="home-service-grid">
-            {platforms.map(([name, description, status]) => (
-              <Card key={name} title={name}>
-                <p>{description}</p>
-                <span className="status-chip">{status}</span>
+            {platformDefinitions.map((platform) => (
+              <Card key={platform.routeSegment} title={platform.name}>
+                <p>{platform.description}</p>
+                <span className="status-chip">{platform.status}</span>
+                <p style={{ marginTop: "0.75rem" }}>
+                  <ActionButton to={`/services/${platform.routeSegment}`} variant="secondary">
+                    View Page
+                  </ActionButton>
+                </p>
               </Card>
             ))}
           </div>

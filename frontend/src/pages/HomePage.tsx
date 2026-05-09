@@ -3,6 +3,52 @@ import styles from "./HomePage.module.css";
 import AppLayout from "../layouts/AppLayout";
 import heroImage from "/smaj-hero.png";
 import { useEventTracking } from "../hooks/useEventTracking";
+import ActionButton from "../components/ActionButton";
+import StorefrontOutlinedIcon from "@mui/icons-material/StorefrontOutlined";
+import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
+import LocalHospitalOutlinedIcon from "@mui/icons-material/LocalHospitalOutlined";
+import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
+import SportsSoccerOutlinedIcon from "@mui/icons-material/SportsSoccerOutlined";
+import LiveTvOutlinedIcon from "@mui/icons-material/LiveTvOutlined";
+
+const previewServices = [
+  {
+    name: "STORE",
+    description: "Shop ecosystem products and services with Pi.",
+    to: "/services/store",
+    icon: <StorefrontOutlinedIcon fontSize="small" />,
+  },
+  {
+    name: "JOBS",
+    description: "Find opportunities and verified freelance work.",
+    to: "/services/jobs",
+    icon: <WorkOutlineOutlinedIcon fontSize="small" />,
+  },
+  {
+    name: "HEALTH",
+    description: "Discover care options and booking tools.",
+    to: "/services/health",
+    icon: <LocalHospitalOutlinedIcon fontSize="small" />,
+  },
+  {
+    name: "EDU",
+    description: "Access courses, mentorship, and upskilling.",
+    to: "/services/edu",
+    icon: <SchoolOutlinedIcon fontSize="small" />,
+  },
+  {
+    name: "SPORTS",
+    description: "Engage with fan utilities and sports services.",
+    to: "/services/sports",
+    icon: <SportsSoccerOutlinedIcon fontSize="small" />,
+  },
+  {
+    name: "STREAM",
+    description: "Watch and support creator-first streaming.",
+    to: "/services/stream",
+    icon: <LiveTvOutlinedIcon fontSize="small" />,
+  },
+];
 
 const HomePage = () => {
   const trackEvent = useEventTracking();
@@ -62,34 +108,25 @@ const HomePage = () => {
         <section className="home-section">
           <div className="home-section-head">
             <h2>Services Preview</h2>
-            <p>A glimpse into our ecosystem.</p>
+            <p>A quick look at key platforms in the SMAJ PI HUB ecosystem.</p>
           </div>
           <div className="home-service-grid">
-            <article className="home-service-card">
-              <h3>PI Jobs</h3>
-              <p>Freelance and job opportunities.</p>
-            </article>
-            <article className="home-service-card">
-              <h3>SMAJ STORE</h3>
-              <p>Buy products and services with Pi.</p>
-            </article>
-            <article className="home-service-card">
-              <h3>Healthcare</h3>
-              <p>Medical discovery and booking tools.</p>
-            </article>
-            <article className="home-service-card">
-              <h3>Education</h3>
-              <p>Learning, upskilling, and mentorship.</p>
-            </article>
-            <article className="home-service-card">
-              <h3>Transport</h3>
-              <p>Mobility services and rides.</p>
-            </article>
-            <article className="home-service-card">
-              <h3>Housing</h3>
-              <p>Property listings and rental support.</p>
-            </article>
+            {previewServices.map((service) => (
+              <article key={service.name} className="home-service-card">
+                <p style={{ display: "flex", alignItems: "center", gap: "0.4rem", marginBottom: "0.6rem", color: "#5d4f80" }}>
+                  {service.icon}
+                  <strong>{service.name}</strong>
+                </p>
+                <p>{service.description}</p>
+                <ActionButton to={service.to} variant="secondary">
+                  Explore
+                </ActionButton>
+              </article>
+            ))}
           </div>
+          <p style={{ marginTop: "1rem" }}>
+            <Link to="/services">View All Services &rarr;</Link>
+          </p>
         </section>
 
         <section className="home-section">

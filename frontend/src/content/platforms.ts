@@ -1,0 +1,94 @@
+export type PlatformDefinition = {
+  name: string;
+  routeSegment: string;
+  description: string;
+  status: "Ready Now" | "Coming Soon";
+};
+
+export const platformDefinitions: PlatformDefinition[] = [
+  { name: "SMAJ Store", routeSegment: "store", description: "Shop products and services with Pi.", status: "Ready Now" },
+  {
+    name: "SMAJ Food Delivery",
+    routeSegment: "food",
+    description: "Order food through trusted local merchants.",
+    status: "Coming Soon",
+  },
+  {
+    name: "SMAJ PI Jobs",
+    routeSegment: "jobs",
+    description: "Find jobs and freelance opportunities.",
+    status: "Coming Soon",
+  },
+  {
+    name: "SMAJ PI Health",
+    routeSegment: "health",
+    description: "Book care and medical services.",
+    status: "Coming Soon",
+  },
+  {
+    name: "SMAJ PI Edu",
+    routeSegment: "edu",
+    description: "Learn skills from trusted mentors.",
+    status: "Coming Soon",
+  },
+  {
+    name: "SMAJ PI Transport",
+    routeSegment: "transport",
+    description: "Access mobility and ride services.",
+    status: "Coming Soon",
+  },
+  {
+    name: "SMAJ PI Agro",
+    routeSegment: "agro",
+    description: "Support farmers, food supply, and agri-market access.",
+    status: "Coming Soon",
+  },
+  {
+    name: "SMAJ PI Energy",
+    routeSegment: "energy",
+    description: "Discover clean energy and utility services.",
+    status: "Coming Soon",
+  },
+  {
+    name: "SMAJ PI Charity",
+    routeSegment: "charity",
+    description: "Contribute to transparent community support campaigns.",
+    status: "Coming Soon",
+  },
+  {
+    name: "SMAJ PI Housing",
+    routeSegment: "housing",
+    description: "Browse rental and housing options.",
+    status: "Coming Soon",
+  },
+  {
+    name: "SMAJ PI Events",
+    routeSegment: "events",
+    description: "Explore tickets, events, and local experiences.",
+    status: "Coming Soon",
+  },
+  {
+    name: "SMAJ PI Swap",
+    routeSegment: "swap",
+    description: "Swap supported digital assets across ecosystem flows.",
+    status: "Coming Soon",
+  },
+  {
+    name: "SMAJ PI Stream",
+    routeSegment: "stream",
+    description: "Watch and monetize creator-first streaming content.",
+    status: "Coming Soon",
+  },
+  {
+    name: "SMAJ PI Sports",
+    routeSegment: "sports",
+    description: "Follow sports communities, activities, and fan utilities.",
+    status: "Coming Soon",
+  },
+  {
+    name: "SMAJ Token",
+    routeSegment: "token",
+    description: "Token utility layer for rewards, payments, and growth.",
+    status: "Coming Soon",
+  },
+];

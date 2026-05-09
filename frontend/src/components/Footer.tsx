@@ -71,6 +71,16 @@ const Footer = () => {
           <Link to="/developers"><CodeOutlinedIcon fontSize="small" />Developers</Link>
         </div>
         <div>
+          <h4>Key Services</h4>
+          <Link to="/services/store">STORE</Link>
+          <Link to="/services/jobs">JOBS</Link>
+          <Link to="/services/health">HEALTH</Link>
+          <Link to="/services/edu">EDUCATION</Link>
+          <Link to="/services/sports">SPORTS</Link>
+          <Link to="/services/stream">STREAM</Link>
+          <Link to="/services">View All Services</Link>
+        </div>
+        <div>
           <h4>Social</h4>
           <div className={styles.socialRow} aria-label="Social links">
             <a className={styles.socialIcon} href="/" aria-label="Facebook">

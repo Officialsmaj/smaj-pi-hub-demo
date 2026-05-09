@@ -1,21 +1,6 @@
 import { Link } from "react-router-dom";
 import AppLayout from "../layouts/AppLayout";
-
-const modules = [
-  "SMAJ STORE",
-  "SMAJ FOOD DELIVERY",
-  "SMAJ PI JOBS",
-  "SMAJ PI HEALTH",
-  "SMAJ PI EDU",
-  "SMAJ PI TRANSPORT",
-  "SMAJ PI AGRO",
-  "SMAJ PI ENERGY",
-  "SMAJ PI CHARITY",
-  "SMAJ PI HOUSING",
-  "SMAJ PI EVENTS",
-  "SMAJ PI SWAP",
-  "SMAJ TOKEN",
-];
+import { platformDefinitions } from "../content/platforms";
 
 const roadmap = [
   ["Q1-Q2 2026", "Phase 1", "Core infrastructure launch with SMAJ PI HUB and SMAJ STORE."],
@@ -49,7 +34,7 @@ const WhitePaperPage = () => {
             <aside className="content-panel">
               <h3>White Paper Snapshot</h3>
               <ul>
-                <li>13 integrated ecosystem platforms</li>
+                <li>15 integrated ecosystem platforms</li>
                 <li>Blockchain-powered identity and payments</li>
                 <li>AI-guided navigation and automation</li>
                 <li>Pi payments with SMAJ Token utility expansion</li>
@@ -61,7 +46,7 @@ const WhitePaperPage = () => {
         <section className="home-section">
           <div className="home-section-head">
             <h2>Executive Summary</h2>
-            <p>One access point, one wallet flow, one verified identity, and one AI-supported ecosystem.</p>
+            <p>One access point, one Pi wallet flow, one verified identity, and one AI-supported ecosystem.</p>
           </div>
           <div className="home-highlight-grid">
             <article className="home-highlight-card">
@@ -69,8 +54,8 @@ const WhitePaperPage = () => {
               <p>SMAJ PI HUB is the central gateway for users, partners, and developers.</p>
             </article>
             <article className="home-highlight-card">
-              <h3>One Wallet Flow</h3>
-              <p>Single wallet connection for service access and transaction continuity.</p>
+              <h3>One Pi Wallet Flow</h3>
+              <p>Single Pi wallet connection for service access and transaction continuity.</p>
             </article>
             <article className="home-highlight-card">
               <h3>One Verified Identity</h3>
@@ -100,13 +85,13 @@ const WhitePaperPage = () => {
 
         <section className="home-section">
           <div className="home-section-head">
-            <h2>The 13 Integrated Platforms</h2>
+            <h2>The 15 Integrated Platforms</h2>
           </div>
           <div className="wp-modules-grid">
-            {modules.map((module, index) => (
-              <article key={module} className="home-service-card">
+            {platformDefinitions.map((platform, index) => (
+              <article key={platform.routeSegment} className="home-service-card">
                 <h3>
-                  {index + 1}. {module}
+                  {index + 1}. {platform.name}
                 </h3>
               </article>
             ))}
