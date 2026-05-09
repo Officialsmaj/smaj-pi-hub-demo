@@ -5,7 +5,7 @@ console.log("NODE_ENV: " + process.env.NODE_ENV);
 const result = dotenv.config();
 
 if (result.error) {
-  if (process.env.NODE_ENV === "development") {
+  if (process.env.NODE_ENV === "development" && !process.env.RUNNING_IN_CONTAINER) {
     console.error(".env file not found. This is an error condition in development. Additional error is logged below");
     throw result.error;
   }

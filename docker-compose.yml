@@ -29,6 +29,7 @@ services:
     ports:
       - "8000:8000"
     environment:
+      RUNNING_IN_CONTAINER: "true"
       NODE_ENV: ${ENVIRONMENT}
       SESSION_SECRET: ${SESSION_SECRET}
       PI_API_KEY: ${PI_API_KEY}
