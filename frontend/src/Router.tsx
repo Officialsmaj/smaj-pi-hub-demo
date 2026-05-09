@@ -22,6 +22,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import PrivateLayout from "./layouts/PrivateLayout";
 import PrivatePage from "./pages/private/PrivatePage";
 import RoleRoute from "./components/RoleRoute";
+import SearchPage from "./pages/private/SearchPage";
 
 const buildPrivatePageElement = (title: string, description: string, roles?: string[]) => {
   const page = <PrivatePage title={title} description={description} />;
@@ -215,6 +216,16 @@ export const router = createBrowserRouter(
     {
       path: "/settings",
       element: <Navigate to="/app/settings" replace />,
+    },
+    {
+      path: "/search",
+      element: (
+        <ProtectedRoute>
+          <PrivateLayout>
+            <SearchPage />
+          </PrivateLayout>
+        </ProtectedRoute>
+      ),
     },
     ...privatePages.map((page) => ({
       path: `/app/${page.path}`,

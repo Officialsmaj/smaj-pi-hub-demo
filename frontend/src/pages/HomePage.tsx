@@ -10,6 +10,7 @@ import LocalHospitalOutlinedIcon from "@mui/icons-material/LocalHospitalOutlined
 import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
 import SportsSoccerOutlinedIcon from "@mui/icons-material/SportsSoccerOutlined";
 import LiveTvOutlinedIcon from "@mui/icons-material/LiveTvOutlined";
+import { useAuthContext } from "../contexts/AuthContext";
 
 const previewServices = [
   {
@@ -52,6 +53,7 @@ const previewServices = [
 
 const HomePage = () => {
   const trackEvent = useEventTracking();
+  const { isAuthenticated, user, signIn, isLoading } = useAuthContext();
 
   return (
     <AppLayout>
@@ -66,17 +68,33 @@ const HomePage = () => {
                 more through Pi wallet access and expanding SMAJ Token utility.
               </p>
               <div className="home-hero-cta">
+                {isAuthenticated ? (
+                  <Link
+                    to="/dashboard"
+                    className="home-hero-primary-btn"
+                    onClick={() => trackEvent({ event: "home_cta_click", payload: { cta: "go_dashboard" } })}
+                  >
+                    {user ? `👤 ${user.username}` : "Dashboard"}
+                  </Link>
+                ) : (
+                  <button
+                    type="button"
+                    className="home-hero-primary-btn"
+                    onClick={() => {
+                      trackEvent({ event: "home_cta_click", payload: { cta: "login_with_pi" } });
+                      void signIn();
+                    }}
+                    disabled={isLoading}
+                  >
+                    {isLoading ? "Signing in..." : "Login with Pi"}
+                  </button>
+                )}
                 <Link
                   to="/services"
-                  onClick={() => trackEvent({ event: "home_cta_click", payload: { cta: "platform_directory" } })}
+                  className="home-hero-secondary-btn"
+                  onClick={() => trackEvent({ event: "home_cta_click", payload: { cta: "explore_services" } })}
                 >
-                  Platform Directory
-                </Link>
-                <Link
-                  to="/white-paper"
-                  onClick={() => trackEvent({ event: "home_cta_click", payload: { cta: "read_white_paper" } })}
-                >
-                  Read White Paper
+                  Explore Services
                 </Link>
               </div>
               <div className="home-proof">
