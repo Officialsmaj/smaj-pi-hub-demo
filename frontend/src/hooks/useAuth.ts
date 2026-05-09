@@ -117,14 +117,6 @@ export const useAuth = () => {
     }
 
     const backendURL = getBaseURL();
-    if (!backendURL) {
-      setAuthFeedback({
-        type: "error",
-        message: "Backend URL is not configured. Set VITE_BACKEND_URL (dev) or BACKEND_URL (frontend container).",
-      });
-      setIsLoading(false);
-      return;
-    }
 
     try {
       const scopes = ["username", "payments", "roles", "in_app_notifications"];
@@ -134,7 +126,10 @@ export const useAuth = () => {
       console.error("Sign-in process failed:", err);
       // Only show generic Pi Browser error if it's not a backend Axios error
       if ((err as any).isAxiosError || (err as AxiosError).response) {
-        setAuthFeedback({ type: "error", message: toErrorMessage(err) });
+        const fallbackHint = !backendURL
+          ? " Backend URL is missing; set VITE_BACKEND_URL (dev) or BACKEND_URL (frontend container)."
+          : "";
+        setAuthFeedback({ type: "error", message: `${toErrorMessage(err)}${fallbackHint}` });
       } else if ((err as Error)?.message === "PI_AUTH_TIMEOUT") {
         setAuthFeedback({
           type: "error",
