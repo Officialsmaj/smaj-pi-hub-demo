@@ -15,11 +15,6 @@ type BackendErrorBody = {
 
 const PI_AUTH_TIMEOUT_MS = 10_000;
 
-const isPiBrowserEnvironment = () => {
-  const ua = typeof navigator !== "undefined" ? navigator.userAgent.toLowerCase() : "";
-  return ua.includes("pibrowser");
-};
-
 const authenticateWithTimeout = (
   scopes: string[],
   onIncompletePaymentFound: (payment: PaymentDTO) => void,
@@ -121,15 +116,6 @@ export const useAuth = () => {
       return;
     }
 
-    if (!isPiBrowserEnvironment()) {
-      setAuthFeedback({
-        type: "error",
-        message: "Login with Pi works only inside Pi Browser. Please open this app in Pi Browser and try again.",
-      });
-      setIsLoading(false);
-      return;
-    }
-
     const backendURL = getBaseURL();
     if (!backendURL) {
       setAuthFeedback({
@@ -152,7 +138,7 @@ export const useAuth = () => {
       } else if ((err as Error)?.message === "PI_AUTH_TIMEOUT") {
         setAuthFeedback({
           type: "error",
-          message: "Pi login request timed out. Please make sure you are in Pi Browser and try again.",
+          message: "Pi login request timed out. Please reopen the app from Pi Browser and try again.",
         });
       } else {
         setAuthFeedback({ type: "error", message: "Authentication was cancelled or failed in Pi Browser." });
