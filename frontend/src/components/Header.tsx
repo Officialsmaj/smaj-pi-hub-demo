@@ -3,27 +3,35 @@ import { NavLink, useLocation } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import LoginIcon from "@mui/icons-material/Login";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useAuthContext } from "../contexts/AuthContext";
 import logoImage from "/logo.png";
 
 const navItems = [
-  { to: "/home", label: "Home" },
-  { to: "/about", label: "About" },
-  { to: "/services", label: "Services" },
   { to: "/white-paper", label: "White Paper" },
-  { to: "/how-it-works", label: "How It Works" },
   { to: "/pricing", label: "Pricing" },
-  { to: "/faq", label: "FAQ" },
   { to: "/contact", label: "Contact" },
+];
+
+const serviceMenuItems = [
+  { to: "/services/store", label: "Commerce" },
+  { to: "/services/jobs", label: "Jobs" },
+  { to: "/services/health", label: "Health" },
+  { to: "/services/edu", label: "Education" },
+  { to: "/services/transport", label: "Transport" },
+  { to: "/services/stream", label: "Entertainment" },
+  { to: "/services", label: "More..." },
 ];
 
 const Header = () => {
   const { user, isAuthenticated, signIn, signOut, isLoading, authFeedback } = useAuthContext();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isServicesMenuOpen, setIsServicesMenuOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
+    setIsServicesMenuOpen(false);
   }, [location.pathname]);
 
   useEffect(() => {
@@ -34,6 +42,7 @@ const Header = () => {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setIsMobileMenuOpen(false);
+        setIsServicesMenuOpen(false);
       }
     };
 
@@ -86,6 +95,30 @@ const Header = () => {
             <span>Close</span>
             <CloseIcon fontSize="small" />
           </button>
+          <NavLink to="/home">Home</NavLink>
+          <NavLink to="/about">About</NavLink>
+          <div
+            className={`smaj-services-menu ${isServicesMenuOpen ? "smaj-services-menu-open" : ""}`}
+            onMouseEnter={() => setIsServicesMenuOpen(true)}
+            onMouseLeave={() => setIsServicesMenuOpen(false)}
+          >
+            <NavLink
+              to="/services"
+              className="smaj-services-trigger"
+              onClick={() => setIsServicesMenuOpen((open) => !open)}
+              aria-expanded={isServicesMenuOpen}
+            >
+              <span>Services</span>
+              <KeyboardArrowDownIcon fontSize="small" />
+            </NavLink>
+            <div className="smaj-services-dropdown" role="menu" aria-label="Services categories">
+              {serviceMenuItems.map((item) => (
+                <NavLink key={item.to} to={item.to}>
+                  {item.label}
+                </NavLink>
+              ))}
+            </div>
+          </div>
           {navItems.map((item) => (
             <NavLink key={item.to} to={item.to}>
               {item.label}
