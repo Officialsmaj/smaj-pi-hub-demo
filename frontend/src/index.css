@@ -543,6 +543,196 @@ h4, h5, h6 {
   gap: 18px;
 }
 
+.private-shell {
+  min-height: 100vh;
+  background: #f5f3fc;
+}
+
+.private-header {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: #fff;
+  border-bottom: 1px solid #e8e2fb;
+}
+
+.private-header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.private-logo-link {
+  display: inline-flex;
+}
+
+.private-logo {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+}
+
+.private-header-nav {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.private-header-nav a,
+.private-logout {
+  text-decoration: none;
+  color: #3f2a7f;
+  font-size: 14px;
+  font-weight: 600;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.private-header-nav a.active {
+  color: #6b3fe6;
+}
+
+.private-logout {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.private-menu-toggle {
+  display: none;
+  border: 1px solid #d8ccfb;
+  background: #fff;
+  color: #3f2a7f;
+  border-radius: 8px;
+  padding: 7px 10px;
+}
+
+.private-body {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 16px;
+}
+
+.private-sidebar {
+  background: #fff;
+  border: 1px solid #e8e2fb;
+  border-radius: 10px;
+  padding: 14px;
+  height: fit-content;
+}
+
+.private-sidebar-block + .private-sidebar-block {
+  margin-top: 14px;
+}
+
+.private-sidebar h3 {
+  margin: 0 0 8px;
+  font-size: 13px;
+  color: #6b5b95;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.private-sidebar a {
+  display: block;
+  text-decoration: none;
+  color: #3f2a7f;
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 14px;
+}
+
+.private-sidebar a.active {
+  background: #efe8ff;
+  color: #6b3fe6;
+}
+
+.private-side-note {
+  margin: 0;
+  color: #6f648d;
+  font-size: 13px;
+}
+
+.private-content {
+  min-width: 0;
+}
+
+.private-page {
+  display: grid;
+  gap: 14px;
+}
+
+.private-card {
+  background: #fff;
+  border: 1px solid #e8e2fb;
+  border-radius: 10px;
+  padding: 18px;
+}
+
+.private-kicker {
+  margin: 0 0 8px;
+  font-size: 12px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #6b3fe6;
+  font-weight: 700;
+}
+
+.private-metadata {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.private-metadata span {
+  background: #f7f3ff;
+  border: 1px solid #e6dcff;
+  border-radius: 8px;
+  padding: 8px 10px;
+  color: #4e3f73;
+  font-size: 13px;
+}
+
+.private-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.private-link-card {
+  border: 1px solid #e3d8ff;
+  background: #fbf9ff;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #3f2a7f;
+  font-weight: 600;
+  padding: 12px;
+}
+
+.private-footer {
+  border-top: 1px solid #e8e2fb;
+  background: #fff;
+  margin-top: 12px;
+  padding: 14px 16px 22px;
+}
+
+.private-footer p {
+  max-width: 1200px;
+  margin: 0 auto;
+  color: #5f5580;
+  font-size: 13px;
+}
+
 @media (max-width: 767px) {
   .smaj-header-inner {
     position: relative;
@@ -666,6 +856,50 @@ h4, h5, h6 {
   .smaj-login-icon {
     margin-right: 0;
   }
+
+  .private-header-nav {
+    display: none;
+  }
+
+  .private-menu-toggle {
+    display: inline-flex;
+    margin-left: auto;
+  }
+
+  .private-body {
+    grid-template-columns: 1fr;
+    padding: 12px;
+  }
+
+  .private-sidebar {
+    position: fixed;
+    left: -100%;
+    top: 64px;
+    bottom: 0;
+    width: 290px;
+    border-radius: 0;
+    z-index: 70;
+    transition: left 0.2s ease;
+    overflow-y: auto;
+  }
+
+  .private-sidebar-open {
+    left: 0;
+  }
+
+  .private-overlay {
+    position: fixed;
+    inset: 0;
+    top: 64px;
+    z-index: 65;
+    border: 0;
+    background: rgba(20, 16, 35, 0.36);
+  }
+
+  .private-grid,
+  .private-metadata {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
@@ -776,6 +1010,22 @@ h4, h5, h6 {
 
   .smaj-mobile-auth-sheet .smaj-auth-feedback {
     margin-bottom: 8px;
+  }
+
+  .private-header-nav {
+    gap: 10px;
+  }
+
+  .private-body {
+    grid-template-columns: 210px 1fr;
+  }
+
+  .private-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .private-metadata {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .smaj-mobile-auth-sheet .smaj-user-info {

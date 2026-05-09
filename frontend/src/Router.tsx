@@ -17,6 +17,21 @@ import BlogPage from "./pages/BlogPage.tsx";
 import BlogPostPage from "./pages/BlogPostPage.tsx";
 import { CookiesPage, PrivacyPage, ReportAbusePage, TermsPage } from "./pages/LegalPages.tsx";
 import { platformDefinitions } from "./content/platforms";
+import { privatePages } from "./content/privatePages";
+import ProtectedRoute from "./components/ProtectedRoute";
+import PrivateLayout from "./layouts/PrivateLayout";
+import PrivatePage from "./pages/private/PrivatePage";
+import RoleRoute from "./components/RoleRoute";
+
+const buildPrivatePageElement = (title: string, description: string, roles?: string[]) => {
+  const page = <PrivatePage title={title} description={description} />;
+
+  return (
+    <ProtectedRoute>
+      <PrivateLayout>{roles ? <RoleRoute allowedRoles={roles} title={title}>{page}</RoleRoute> : page}</PrivateLayout>
+    </ProtectedRoute>
+  );
+};
 
 export const router = createBrowserRouter(
   [
@@ -173,6 +188,14 @@ export const router = createBrowserRouter(
       path: "/engagement-tasks",
       element: <EngagementTasksPage />,
     },
+    {
+      path: "/app",
+      element: <Navigate to="/app/dashboard" replace />,
+    },
+    ...privatePages.map((page) => ({
+      path: `/app/${page.path}`,
+      element: buildPrivatePageElement(page.title, page.description, page.roles),
+    })),
     {
       path: "*",
       element: <NotFoundPage />,
