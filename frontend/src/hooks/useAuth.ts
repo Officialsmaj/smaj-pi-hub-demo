@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
 import { useCallback, useState, useEffect } from "react";
-import { axiosClient } from "../lib/axiosClient";
+import { axiosClient, getBaseURL } from "../lib/axiosClient";
 import type { AuthResult, PaymentDTO, User } from "../types/pi";
 
 type AuthFeedback = {
@@ -25,6 +25,10 @@ const toErrorMessage = (err: unknown) => {
 
   if (status === 401) {
     return "Pi token verification failed (401). If you are in Sandbox, set backend PLATFORM_API_URL to sandbox and verify PI_API_KEY.";
+  }
+
+  if (status === 405) {
+    return "Login endpoint rejected the request (405). BACKEND_URL is likely misconfigured and requests are going to the frontend server instead of the backend API.";
   }
 
   if (backendMessage) {
@@ -91,6 +95,16 @@ export const useAuth = () => {
 
     if (!window.Pi) {
       setAuthFeedback({ type: "error", message: "Pi SDK not found. Open this app in Pi Browser." });
+      setIsLoading(false);
+      return;
+    }
+
+    const backendURL = getBaseURL();
+    if (!backendURL) {
+      setAuthFeedback({
+        type: "error",
+        message: "Backend URL is not configured. Set VITE_BACKEND_URL (dev) or BACKEND_URL (frontend container).",
+      });
       setIsLoading(false);
       return;
     }

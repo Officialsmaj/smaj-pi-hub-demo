@@ -1,13 +1,18 @@
 import axios from "axios";
 
-const getBaseURL = () => {
+export const getBaseURL = () => {
   const runtimeURL = typeof window !== "undefined" ? window.__ENV?.backendURL : undefined;
 
   if (runtimeURL && runtimeURL !== "$$BACKEND_URL$$") {
     return runtimeURL;
   }
 
-  return import.meta.env.VITE_BACKEND_URL;
+  const buildURL = import.meta.env.VITE_BACKEND_URL;
+  if (buildURL && buildURL !== "$$BACKEND_URL$$") {
+    return buildURL;
+  }
+
+  return undefined;
 };
 
 export const axiosClient = axios.create({
