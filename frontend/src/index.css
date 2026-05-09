@@ -41,6 +41,8 @@ h4, h5, h6 {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+  position: relative;
+  z-index: 1;
 }
 
 .smaj-logo-link {
@@ -59,6 +61,8 @@ h4, h5, h6 {
   align-items: center;
   gap: 14px;
   flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
 }
 
 .smaj-nav a {
@@ -456,6 +460,9 @@ h4, h5, h6 {
   display: flex;
   align-items: center;
   gap: 8px;
+  position: relative;
+  z-index: 5;
+  pointer-events: auto;
 }
 
 .smaj-auth-search-btn {
@@ -469,7 +476,7 @@ h4, h5, h6 {
   justify-content: center;
   cursor: pointer;
   position: relative;
-  z-index: 4;
+  z-index: 6;
   pointer-events: auto;
   margin-right: 8px;
 }
