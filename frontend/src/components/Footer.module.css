@@ -141,9 +141,10 @@
 }
 
 .logoImg {
-  height: 40px;
+  display: block;
+  height: 44px;
   width: auto;
-  opacity: 0.8;
+  opacity: 1;
   transition: opacity 0.3s ease;
 }
 

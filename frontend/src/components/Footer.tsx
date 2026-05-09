@@ -20,7 +20,6 @@ import HandshakeOutlinedIcon from "@mui/icons-material/HandshakeOutlined";
 import ForumOutlinedIcon from "@mui/icons-material/ForumOutlined";
 import CodeOutlinedIcon from "@mui/icons-material/CodeOutlined";
 import ArrowUpwardOutlinedIcon from "@mui/icons-material/ArrowUpwardOutlined";
-import smajEcosystemLogo from "../../../smaj_ecosystem_logo.png";
 import styles from "./Footer.module.css";
 
 const Footer = () => {
@@ -98,8 +97,8 @@ const Footer = () => {
 
       <div className={styles.footerBottomBar}>
         <div className={styles.poweredBy}>
-          <a href="/" className={styles.logoLink} aria-label="SMAJ Ecosystem">
-            <img src={smajEcosystemLogo} alt="SMAJ Ecosystem Logo" className={styles.logoImg} />
+          <a href="https://smaj.org" className={styles.logoLink} aria-label="SMAJ Ecosystem">
+            <img src="/smajpihub/smaj_ecosystem_logo.png" alt="SMAJ Ecosystem Logo" className={styles.logoImg} />
           </a>
           <p className={styles.poweredText}>
             <span style={{ fontWeight: "bold", fontSize: "1rem" }}></span>
