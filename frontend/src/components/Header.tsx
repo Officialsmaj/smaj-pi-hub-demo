@@ -4,11 +4,13 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import LoginIcon from "@mui/icons-material/Login";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { useAuthContext } from "../contexts/AuthContext";
 import logoImage from "/logo.png";
 
 const navItems = [
   { to: "/white-paper", label: "White Paper" },
+  { to: "/how-it-works", label: "How It Works" },
   { to: "/pricing", label: "Pricing" },
   { to: "/contact", label: "Contact" },
 ];
@@ -20,7 +22,7 @@ const serviceMenuItems = [
   { to: "/services/edu", label: "Education" },
   { to: "/services/transport", label: "Transport" },
   { to: "/services/stream", label: "Entertainment" },
-  { to: "/services", label: "More..." },
+  { to: "/services", label: "More Services \u2192" },
 ];
 
 const Header = () => {
@@ -102,18 +104,26 @@ const Header = () => {
             onMouseEnter={() => setIsServicesMenuOpen(true)}
             onMouseLeave={() => setIsServicesMenuOpen(false)}
           >
-            <NavLink
-              to="/services"
+            <button
+              type="button"
               className="smaj-services-trigger"
               onClick={() => setIsServicesMenuOpen((open) => !open)}
               aria-expanded={isServicesMenuOpen}
+              aria-label="Toggle services menu"
             >
               <span>Services</span>
-              <KeyboardArrowDownIcon fontSize="small" />
-            </NavLink>
+              {isServicesMenuOpen ? <KeyboardArrowDownIcon fontSize="small" /> : <KeyboardArrowRightIcon fontSize="small" />}
+            </button>
             <div className="smaj-services-dropdown" role="menu" aria-label="Services categories">
               {serviceMenuItems.map((item) => (
-                <NavLink key={item.to} to={item.to}>
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  onClick={() => {
+                    setIsServicesMenuOpen(false);
+                    setIsMobileMenuOpen(false);
+                  }}
+                >
                   {item.label}
                 </NavLink>
               ))}

@@ -100,6 +100,13 @@ h4, h5, h6 {
 }
 
 .smaj-services-trigger {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  color: #3f2a7f;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0;
   display: inline-flex;
   align-items: center;
   gap: 2px;
@@ -117,6 +124,7 @@ h4, h5, h6 {
   box-shadow: 0 10px 24px rgba(32, 19, 70, 0.12);
   display: none;
   z-index: 50;
+  pointer-events: auto;
 }
 
 .smaj-services-menu:hover .smaj-services-dropdown,
@@ -578,6 +586,18 @@ h4, h5, h6 {
     position: static;
   }
 
+  .smaj-services-trigger {
+    width: 100%;
+    justify-content: space-between;
+    padding: 11px 10px;
+    border-radius: 8px;
+    font-size: 0.98rem;
+  }
+
+  .smaj-services-trigger svg {
+    display: inline;
+  }
+
   .smaj-services-dropdown {
     position: static;
     margin: 4px 0 8px;
@@ -689,6 +709,18 @@ h4, h5, h6 {
 
   .smaj-services-menu {
     position: static;
+  }
+
+  .smaj-services-trigger {
+    width: 100%;
+    justify-content: space-between;
+    padding: 14px 12px;
+    border-radius: 8px;
+    font-size: 1.15rem;
+  }
+
+  .smaj-services-trigger svg {
+    display: inline;
   }
 
   .smaj-services-dropdown {
