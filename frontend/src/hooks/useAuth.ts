@@ -13,6 +13,28 @@ type BackendErrorBody = {
   message?: string;
 };
 
+const PI_AUTH_TIMEOUT_MS = 10_000;
+
+const isPiBrowserEnvironment = () => {
+  const ua = typeof navigator !== "undefined" ? navigator.userAgent.toLowerCase() : "";
+  return ua.includes("pibrowser");
+};
+
+const authenticateWithTimeout = (
+  scopes: string[],
+  onIncompletePaymentFound: (payment: PaymentDTO) => void,
+  timeoutMs: number,
+) => {
+  return Promise.race<AuthResult>([
+    window.Pi.authenticate(scopes, onIncompletePaymentFound),
+    new Promise<AuthResult>((_, reject) => {
+      setTimeout(() => {
+        reject(new Error("PI_AUTH_TIMEOUT"));
+      }, timeoutMs);
+    }),
+  ]);
+};
+
 const toErrorMessage = (err: unknown) => {
   const axiosErr = err as AxiosError<BackendErrorBody>;
 
@@ -99,6 +121,15 @@ export const useAuth = () => {
       return;
     }
 
+    if (!isPiBrowserEnvironment()) {
+      setAuthFeedback({
+        type: "error",
+        message: "Login with Pi works only inside Pi Browser. Please open this app in Pi Browser and try again.",
+      });
+      setIsLoading(false);
+      return;
+    }
+
     const backendURL = getBaseURL();
     if (!backendURL) {
       setAuthFeedback({
@@ -111,13 +142,18 @@ export const useAuth = () => {
 
     try {
       const scopes = ["username", "payments", "roles", "in_app_notifications"];
-      const authResult = await window.Pi.authenticate(scopes, onIncompletePaymentFound);
+      const authResult = await authenticateWithTimeout(scopes, onIncompletePaymentFound, PI_AUTH_TIMEOUT_MS);
       await signInUser(authResult);
     } catch (err) {
       console.error("Sign-in process failed:", err);
       // Only show generic Pi Browser error if it's not a backend Axios error
       if ((err as any).isAxiosError || (err as AxiosError).response) {
         setAuthFeedback({ type: "error", message: toErrorMessage(err) });
+      } else if ((err as Error)?.message === "PI_AUTH_TIMEOUT") {
+        setAuthFeedback({
+          type: "error",
+          message: "Pi login request timed out. Please make sure you are in Pi Browser and try again.",
+        });
       } else {
         setAuthFeedback({ type: "error", message: "Authentication was cancelled or failed in Pi Browser." });
       }
