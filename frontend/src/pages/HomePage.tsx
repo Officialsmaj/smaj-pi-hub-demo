@@ -33,7 +33,7 @@ const previewServices = [
   {
     name: "EDU",
     description: "Access courses, mentorship, and upskilling.",
-    to: "/services/edu",
+    to: "/services/education",
     icon: <SchoolOutlinedIcon fontSize="small" />,
   },
   {

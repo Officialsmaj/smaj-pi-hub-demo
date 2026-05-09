@@ -86,7 +86,7 @@ export const router = createBrowserRouter(
     },
     {
       path: "/smaj-food-delivery",
-      element: <Navigate to="/services/food" replace />,
+      element: <Navigate to="/services/food-delivery" replace />,
     },
     {
       path: "/smaj-pi-jobs",
@@ -98,7 +98,7 @@ export const router = createBrowserRouter(
     },
     {
       path: "/smaj-pi-edu",
-      element: <Navigate to="/services/edu" replace />,
+      element: <Navigate to="/services/education" replace />,
     },
     {
       path: "/smaj-pi-transport",
@@ -191,6 +191,30 @@ export const router = createBrowserRouter(
     {
       path: "/app",
       element: <Navigate to="/app/dashboard" replace />,
+    },
+    {
+      path: "/dashboard",
+      element: <Navigate to="/app/dashboard" replace />,
+    },
+    {
+      path: "/profile",
+      element: <Navigate to="/app/profile" replace />,
+    },
+    {
+      path: "/wallet",
+      element: <Navigate to="/app/wallet" replace />,
+    },
+    {
+      path: "/orders",
+      element: <Navigate to="/app/orders" replace />,
+    },
+    {
+      path: "/messages",
+      element: <Navigate to="/app/messages" replace />,
+    },
+    {
+      path: "/settings",
+      element: <Navigate to="/app/settings" replace />,
     },
     ...privatePages.map((page) => ({
       path: `/app/${page.path}`,

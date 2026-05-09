@@ -19,7 +19,7 @@ const serviceMenuItems = [
   { to: "/services/store", label: "Commerce" },
   { to: "/services/jobs", label: "Jobs" },
   { to: "/services/health", label: "Health" },
-  { to: "/services/edu", label: "Education" },
+  { to: "/services/education", label: "Education" },
   { to: "/services/transport", label: "Transport" },
   { to: "/services/stream", label: "Entertainment" },
   { to: "/services", label: "More Services \u2192" },

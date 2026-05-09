@@ -9,7 +9,7 @@ export const platformDefinitions: PlatformDefinition[] = [
   { name: "SMAJ Store", routeSegment: "store", description: "Shop products and services with Pi.", status: "Ready Now" },
   {
     name: "SMAJ Food Delivery",
-    routeSegment: "food",
+    routeSegment: "food-delivery",
     description: "Order food through trusted local merchants.",
     status: "Coming Soon",
   },
@@ -27,7 +27,7 @@ export const platformDefinitions: PlatformDefinition[] = [
   },
   {
     name: "SMAJ PI Edu",
-    routeSegment: "edu",
+    routeSegment: "education",
     description: "Learn skills from trusted mentors.",
     status: "Coming Soon",
   },

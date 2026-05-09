@@ -75,7 +75,7 @@ const Footer = () => {
           <Link to="/services/store">STORE</Link>
           <Link to="/services/jobs">JOBS</Link>
           <Link to="/services/health">HEALTH</Link>
-          <Link to="/services/edu">EDUCATION</Link>
+          <Link to="/services/education">EDUCATION</Link>
           <Link to="/services/sports">SPORTS</Link>
           <Link to="/services/stream">STREAM</Link>
           <Link to="/services">View All Services</Link>
