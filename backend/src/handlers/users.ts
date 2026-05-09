@@ -59,6 +59,13 @@ try {
     }
   });
 
+  // GET /user (session check)
+  router.get("/", async (req: Request, res: Response) => {
+    return res.status(200).json({
+      user: req.session.currentUser ?? null,
+    });
+  });
+
   // GET /user/signout
   router.get("/signout", async (req: Request, res: Response) => {
     req.session.currentUser = null;
