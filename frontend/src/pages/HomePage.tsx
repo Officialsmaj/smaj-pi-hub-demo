@@ -1,15 +1,14 @@
 import { Link } from "react-router-dom";
-import styles from "./HomePage.module.css";
 import AppLayout from "../layouts/AppLayout";
-import heroImage from "/smaj-hero.png";
-import { useEventTracking } from "../hooks/useEventTracking";
 import ActionButton from "../components/ActionButton";
+import heroImage from "/smaj-hero.png";
 import StorefrontOutlinedIcon from "@mui/icons-material/StorefrontOutlined";
 import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
 import LocalHospitalOutlinedIcon from "@mui/icons-material/LocalHospitalOutlined";
 import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
 import SportsSoccerOutlinedIcon from "@mui/icons-material/SportsSoccerOutlined";
 import LiveTvOutlinedIcon from "@mui/icons-material/LiveTvOutlined";
+import SpaOutlinedIcon from "@mui/icons-material/SpaOutlined";
 import { useAuthContext } from "../contexts/AuthContext";
 
 const previewServices = [
@@ -52,73 +51,59 @@ const previewServices = [
 ];
 
 const HomePage = () => {
-  const trackEvent = useEventTracking();
-  const { isAuthenticated, user, signIn, isLoading } = useAuthContext();
+  const { signIn, isLoading } = useAuthContext();
 
   return (
     <AppLayout>
-      <main className={styles.homePage}>
-        <section className={styles.homeHero}>
-          <div className={styles.homeHeroGrid}>
+      <main className="home-page">
+        <section className="home-hero">
+          <div className="home-hero-grid">
             <div>
-              <span className={styles.homeKicker}>SMAJ PI HUB ECOSYSTEM</span>
-              <h1>All Your Pi Services in One Place.</h1>
+              <span className="home-kicker">15+ PLATFORMS CONNECTED</span>
+              <h1>The Unified Pi-Powered Digital Ecosystem</h1>
               <p>
-                Connect once and access services like jobs, healthcare, education, transport, housing, charity, and
-                more through Pi wallet access and expanding SMAJ Token utility.
+                Access shopping, jobs, healthcare, education, transport, entertainment and more — all with one Pi
+                login.
               </p>
               <div className="home-hero-cta">
-                {isAuthenticated ? (
-                  <Link
-                    to="/dashboard"
-                    className="home-hero-primary-btn"
-                    onClick={() => trackEvent({ event: "home_cta_click", payload: { cta: "go_dashboard" } })}
-                  >
-                    {user ? `👤 ${user.username}` : "Dashboard"}
-                  </Link>
-                ) : (
-                  <button
-                    type="button"
-                    className="home-hero-primary-btn"
-                    onClick={() => {
-                      trackEvent({ event: "home_cta_click", payload: { cta: "login_with_pi" } });
-                      void signIn();
-                    }}
-                    disabled={isLoading}
-                  >
-                    {isLoading ? "Signing in..." : "Login with Pi"}
-                  </button>
-                )}
-                <Link
-                  to="/services"
-                  className="home-hero-secondary-btn"
-                  onClick={() => trackEvent({ event: "home_cta_click", payload: { cta: "explore_services" } })}
-                >
+                <button type="button" className="home-hero-primary-btn" onClick={() => void signIn()} disabled={isLoading}>
+                  {isLoading ? "Signing in..." : "Login with Pi"}
+                </button>
+                <Link to="/services" className="home-hero-secondary-btn">
                   Explore Services
                 </Link>
               </div>
               <div className="home-proof">
-                <div>
-                  <strong>Pi Native</strong>
-                  <span>Built for Pi transactions</span>
+                <div className="home-proof-award">
+                  <div className="home-laurel-badge">
+                    <SpaOutlinedIcon className="home-laurel-icon" />
+                    <div className="home-laurel-content">
+                      <strong>No.1</strong>
+                      <span>Unified Access</span>
+                    </div>
+                    <SpaOutlinedIcon className="home-laurel-icon home-laurel-icon-mirrored" />
+                  </div>
+                  <span>15+ Services</span>
+                </div>
+                <div className="home-proof-award">
+                  <div className="home-laurel-badge">
+                    <SpaOutlinedIcon className="home-laurel-icon" />
+                    <div className="home-laurel-content">
+                      <strong>No.1</strong>
+                      <span>Pi Utility Ecosystem</span>
+                    </div>
+                    <SpaOutlinedIcon className="home-laurel-icon home-laurel-icon-mirrored" />
+                  </div>
+                  <span>Global Vision</span>
                 </div>
                 <div>
-                  <strong>Secure Flow</strong>
-                  <span>Escrow and verified delivery</span>
-                </div>
-                <div>
-                  <strong>Growing Hub</strong>
-                  <span>More services launching</span>
+                  <strong>250K+ Users</strong>
+                  <span>40K+ Transactions • 12K+ Verified Providers</span>
                 </div>
               </div>
             </div>
-
             <article className="home-hero-card">
-              <img src={heroImage} alt="SMAJ PI HUB platform overview" />
-              <div>
-                <h3>Everything in one Pi ecosystem</h3>
-                <p>Access real utility services from a single trusted platform.</p>
-              </div>
+              <img src={heroImage} alt="SMAJ PI HUB dashboard preview" />
             </article>
           </div>
         </section>

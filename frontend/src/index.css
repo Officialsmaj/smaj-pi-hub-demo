@@ -635,6 +635,54 @@ h4, h5, h6 {
   font-size: 13px;
 }
 
+.home-laurel-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.home-laurel {
+  color: #f5c324;
+  font-size: 28px;
+  line-height: 1;
+}
+
+.home-proof-award {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.home-laurel-icon {
+  color: #f5c324;
+  font-size: 28px !important;
+}
+
+.home-laurel-icon-mirrored {
+  transform: scaleX(-1);
+}
+
+.home-laurel-content {
+  text-align: center;
+}
+
+.home-laurel-content strong {
+  display: block;
+  font-size: 36px;
+  line-height: 1;
+  color: #f5c324;
+  margin-bottom: 2px;
+}
+
+.home-laurel-content span {
+  color: #f5c324;
+  font-size: 14px;
+  font-weight: 600;
+}
+
 .home-hero-card {
   margin: 0;
   background: #ffffff;
@@ -645,8 +693,9 @@ h4, h5, h6 {
 
 .home-hero-card img {
   width: 100%;
-  height: 230px;
-  object-fit: cover;
+  height: auto;
+  max-height: 460px;
+  object-fit: contain;
   display: block;
 }
 
