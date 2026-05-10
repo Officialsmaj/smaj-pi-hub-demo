@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
 import { useCallback, useState, useEffect } from "react";
-import { axiosClient, getBaseURL } from "../lib/axiosClient";
+import { axiosClient } from "../lib/axiosClient";
 import type { AuthResult, PaymentDTO, User } from "../types/pi";
 
 type AuthFeedback = {
@@ -116,8 +116,6 @@ export const useAuth = () => {
       return;
     }
 
-    const backendURL = getBaseURL();
-
     try {
       const scopes = ["username", "payments", "roles", "in_app_notifications"];
       const authResult = await authenticateWithTimeout(scopes, onIncompletePaymentFound, PI_AUTH_TIMEOUT_MS);
@@ -126,10 +124,7 @@ export const useAuth = () => {
       console.error("Sign-in process failed:", err);
       // Only show generic Pi Browser error if it's not a backend Axios error
       if ((err as any).isAxiosError || (err as AxiosError).response) {
-        const fallbackHint = !backendURL
-          ? " Backend URL is missing; set VITE_BACKEND_URL (dev) or BACKEND_URL (frontend container)."
-          : "";
-        setAuthFeedback({ type: "error", message: `${toErrorMessage(err)}${fallbackHint}` });
+        setAuthFeedback({ type: "error", message: toErrorMessage(err) });
       } else if ((err as Error)?.message === "PI_AUTH_TIMEOUT") {
         setAuthFeedback({
           type: "error",

@@ -12,8 +12,8 @@ This guide assumes you have the following installed on your development machine:
 ## 1. Clone the repository
 
 ```sh
-git clone git@github.com:pi-apps/platform-demo-app.git
-cd platform-demo-app
+git clone https://github.com/devsmaj/smajpihub.git
+cd smajpihub
 ```
 
 ## 2. Register your app on the Developer Portal
@@ -44,7 +44,7 @@ Once you submit the form, it will bring you to your app's main page. From here, 
 ### App Configuration:
 
 - **Whitelisted usernames:** Leave blank for now
-- **App URL:** Use your intended production URL (e.g., `https://officialsmaj.github.io/smajpihub/home`) or a placeholder (e.g., `https://example.com`). Must be HTTPS.
+- **App URL:** Use your intended production URL (e.g., `https://devsmaj.github.io/smajpihub/home`) or a placeholder (e.g., `https://example.com`). Must be HTTPS.
 
 Before proceeding, click the "API Key" button on your app's main page and save the generated key—you'll need it for setup.
 

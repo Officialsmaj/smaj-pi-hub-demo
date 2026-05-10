@@ -42,10 +42,10 @@ chmod +x /usr/local/bin/docker-compose
 Obtain a domain name and set up 2 DNS records pointing to your server. One will be used for the frontend app, and one
 will be used for the backend app. (Note: If using GitHub Pages for the frontend, you only need to manage the backend domain).
 
-Here is an example, assuming your domain is officialsmaj.github.io and your server IP is 123.123.123.123.
+Here is an example, assuming your domain is devsmaj.github.io and your server IP is 123.123.123.123.
 
 ```DNS
-A   officialsmaj.github.io   123.123.123.123
+A   devsmaj.github.io   123.123.123.123
 A   backend.smajpihub.com   123.123.123.123
 ```
 
@@ -77,7 +77,7 @@ This will bring you to the App Dashboard, from this screen, you can continue the
 - App Configuration: Additional information that can be adjusted
   - Whitelisted usernames: you can leave this blank at this point
   - Hosting type: select `Self Hosted`
-  - App URL: Enter the intended production URL of your app (e.g "https://officialsmaj.github.io/smajpihub/home"),
+  - App URL: Enter the intended production URL of your app (e.g "https://devsmaj.github.io/smajpihub/home"),
     or simply set it up to an example value (e.g "https://example.com"). This must be an HTTPs URL.
   - Development URL: This is irrelevant for deployment.
 
@@ -87,7 +87,7 @@ Create a .env config file in order to enable docker-compose to pick up your envi
 
 ```shell
 # Move to the app's directory:
-cd platform-demo-app
+cd smajpihub
 
 # Create .env from the starter template:
 cp .env.example .env
@@ -143,7 +143,7 @@ SESSION_SECRET=
 
 ### 7. Run the docker containers:
 
-**Make sure you are in the `platform-demo-app` directory before running any `docker-compose` command!**
+**Make sure you are in the `smajpihub` directory before running any `docker-compose` command!**
 
 ```
 docker-compose build

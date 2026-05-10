@@ -273,21 +273,19 @@ h4, h5, h6 {
   font-weight: 600;
 }
 
-.smaj-public-search-mobile-overlay {
+.smaj-search-panel-anchor {
   position: fixed;
-  inset: 0;
-  background: rgba(20, 16, 35, 0.58);
-  backdrop-filter: blur(6px);
+  top: 70px;
+  right: 16px;
   z-index: 90;
-  display: none;
 }
 
 .smaj-public-search-mobile-card {
   background: #fff;
-  width: min(680px, 92vw);
-  margin: 4vh auto;
+  width: min(420px, 92vw);
   border-radius: 12px;
   border: 1px solid #e8e2fb;
+  box-shadow: 0 12px 28px rgba(20, 16, 35, 0.2);
   padding: 14px;
 }
 
@@ -386,20 +384,8 @@ h4, h5, h6 {
   font-size: 12px;
 }
 
-.smaj-search-backdrop-enter {
-  animation: smajFadeIn 0.22s ease;
-}
-
-.smaj-search-backdrop-leave {
-  animation: smajFadeOut 0.22s ease;
-}
-
 .smaj-search-card-enter {
   animation: smajSlideDown 0.24s ease;
-}
-
-.smaj-search-card-leave {
-  animation: smajSlideUpFade 0.22s ease;
 }
 
 @keyframes smajFadeIn {
@@ -407,19 +393,9 @@ h4, h5, h6 {
   to { opacity: 1; }
 }
 
-@keyframes smajFadeOut {
-  from { opacity: 1; }
-  to { opacity: 0; }
-}
-
 @keyframes smajSlideDown {
   from { opacity: 0; transform: translateY(-12px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes smajSlideUpFade {
-  from { opacity: 1; transform: translateY(0); }
-  to { opacity: 0; transform: translateY(-10px); }
 }
 
 .smaj-menu-toggle {
@@ -1360,17 +1336,16 @@ h4, h5, h6 {
     justify-content: center;
   }
 
-  .smaj-public-search-mobile-overlay {
-    display: block;
+  .smaj-public-search-mobile-card {
+    width: calc(100vw - 16px);
+    max-height: calc(100vh - 86px);
+    overflow-y: auto;
   }
 
-  .smaj-public-search-mobile-card {
-    width: 100vw;
-    min-height: 100vh;
-    margin: 0;
-    border-radius: 0;
-    border: 0;
-    padding: 18px 16px;
+  .smaj-search-panel-anchor {
+    left: 8px;
+    right: 8px;
+    top: 68px;
   }
 
   .smaj-drawer-close {

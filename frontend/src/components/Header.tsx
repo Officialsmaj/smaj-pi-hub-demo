@@ -59,18 +59,17 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesMenuOpen, setIsServicesMenuOpen] = useState(false);
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
-  const [isSearchModalClosing, setIsSearchModalClosing] = useState(false);
   const [searchPhraseIndex, setSearchPhraseIndex] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
   const location = useLocation();
   const navigate = useNavigate();
   const searchInputRef = useRef<HTMLInputElement | null>(null);
+  const searchPanelRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     setIsMobileMenuOpen(false);
     setIsServicesMenuOpen(false);
     setIsSearchModalOpen(false);
-    setIsSearchModalClosing(false);
   }, [location.pathname]);
 
   useEffect(() => {
@@ -140,15 +139,24 @@ const Header = () => {
     }
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        setIsSearchModalClosing(true);
-        window.setTimeout(() => {
-          setIsSearchModalOpen(false);
-          setIsSearchModalClosing(false);
-        }, 220);
+        setIsSearchModalOpen(false);
+      }
+    };
+    const onPointerDown = (event: MouseEvent) => {
+      if (!searchPanelRef.current) {
+        return;
+      }
+      const target = event.target as Node;
+      if (!searchPanelRef.current.contains(target)) {
+        setIsSearchModalOpen(false);
       }
     };
     window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
+    window.addEventListener("mousedown", onPointerDown);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("mousedown", onPointerDown);
+    };
   }, [isSearchModalOpen]);
 
   const saveRecentSearch = (term: string) => {
@@ -167,16 +175,11 @@ const Header = () => {
 
   const openSearchModal = () => {
     setSearchQuery("");
-    setIsSearchModalClosing(false);
-    setIsSearchModalOpen(true);
+    setIsSearchModalOpen((open) => !open);
   };
 
   const closeSearchModal = () => {
-    setIsSearchModalClosing(true);
-    window.setTimeout(() => {
-      setIsSearchModalOpen(false);
-      setIsSearchModalClosing(false);
-    }, 220);
+    setIsSearchModalOpen(false);
   };
 
   const handleSearchSelect = (term: string, to?: string) => {
@@ -314,14 +317,8 @@ const Header = () => {
         </div>
       </div>
       {isSearchModalOpen ? (
-        <div
-          className={`smaj-public-search-mobile-overlay ${isSearchModalClosing ? "smaj-search-backdrop-leave" : "smaj-search-backdrop-enter"}`}
-          onClick={closeSearchModal}
-        >
-          <div
-            className={`smaj-public-search-mobile-card ${isSearchModalClosing ? "smaj-search-card-leave" : "smaj-search-card-enter"}`}
-            onClick={(event) => event.stopPropagation()}
-          >
+        <div className="smaj-search-panel-anchor">
+          <div ref={searchPanelRef} className="smaj-public-search-mobile-card smaj-search-card-enter">
             <div className="smaj-public-search-mobile-head">
               <h2>Search SMAJ PI HUB</h2>
               <button type="button" onClick={closeSearchModal} aria-label="Close search">

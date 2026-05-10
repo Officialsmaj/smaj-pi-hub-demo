@@ -179,6 +179,10 @@
   .footerGrid a {
     justify-content: center;
   }
+
+  .socialRow {
+    justify-content: center;
+  }
 }
 
 .scrollToTop {
