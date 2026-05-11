@@ -38,9 +38,9 @@ h4, h5, h6 {
 }
 
 .smaj-header-inner {
-  max-width: 1120px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 10px 16px;
+  padding: 10px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -52,6 +52,7 @@ h4, h5, h6 {
 .smaj-logo-link {
   display: inline-flex;
   align-items: center;
+  margin-right: 14px;
 }
 
 .smaj-logo {
@@ -67,6 +68,7 @@ h4, h5, h6 {
   flex-wrap: wrap;
   position: relative;
   z-index: 1;
+  margin-right: 10px;
 }
 
 .smaj-nav a {
@@ -173,15 +175,24 @@ h4, h5, h6 {
 
 .smaj-public-search-mobile-toggle {
   display: none;
-  border: 1px solid #d8ccfb;
-  background: #fff;
-  color: #3f2a7f;
+  border: 0;
+  background: transparent;
+  color: #f5f7fb;
   border-radius: 8px;
-  padding: 7px 10px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
   position: relative;
   z-index: 3;
   pointer-events: auto;
   cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+}
+
+.smaj-public-search-mobile-toggle:hover {
+  color: #8b5cf6;
 }
 
 .smaj-public-search input {
@@ -286,12 +297,13 @@ h4, h5, h6 {
 }
 
 .smaj-public-search-mobile-card {
-  background: #ffffff;
+  background: #1b2432;
   width: min(420px, 92vw);
   border-radius: 12px;
-  border: 1px solid #dbe2ee;
+  border: 1px solid #324158;
   box-shadow: 0 24px 56px rgba(9, 14, 24, 0.45);
   padding: 14px;
+  color: #e7edf7;
 }
 
 .smaj-public-search-mobile-head {
@@ -327,10 +339,12 @@ h4, h5, h6 {
 
 .smaj-public-search-mobile-form input {
   width: 100%;
-  border: 1px solid #d8ccfb;
+  border: 1px solid #4a5a72;
   border-radius: 8px;
   padding: 10px 10px 10px 34px;
   flex: 1;
+  background: #101722;
+  color: #e7edf7;
 }
 
 .smaj-public-search-inline-icon {
@@ -347,7 +361,7 @@ h4, h5, h6 {
 .smaj-public-search-cancel {
   border: 0;
   background: transparent;
-  color: #3f2a7f;
+  color: #cbb9ff;
   font-weight: 600;
   cursor: pointer;
 }
@@ -355,7 +369,7 @@ h4, h5, h6 {
 .smaj-public-search-mobile-popular-title {
   margin: 12px 0 8px;
   font-size: 13px;
-  color: #5f5580;
+  color: #b5c1d6;
 }
 
 .smaj-public-search-mobile-popular {
@@ -365,9 +379,9 @@ h4, h5, h6 {
 }
 
 .smaj-public-search-mobile-popular a {
-  border: 1px solid #d8ccfb;
-  background: #fff;
-  color: #3f2a7f;
+  border: 1px solid #4a5a72;
+  background: #1f2a3b;
+  color: #e7edf7;
   border-radius: 999px;
   padding: 6px 10px;
   font-size: 12px;
@@ -375,9 +389,9 @@ h4, h5, h6 {
 }
 
 .smaj-public-search-mobile-popular button {
-  border: 1px solid #d8ccfb;
-  background: #fff;
-  color: #3f2a7f;
+  border: 1px solid #4a5a72;
+  background: #1f2a3b;
+  color: #e7edf7;
   border-radius: 999px;
   padding: 6px 10px;
   font-size: 12px;
@@ -385,8 +399,42 @@ h4, h5, h6 {
 
 .smaj-public-search-empty {
   margin: 0;
-  color: #6f648d;
+  color: #b5c1d6;
   font-size: 12px;
+}
+
+.smaj-public-search-mobile-popular a:hover,
+.smaj-public-search-mobile-popular button:hover {
+  color: #cbb9ff;
+  border-color: #6b3fe6;
+}
+
+:root[data-theme="light"] .smaj-public-search-mobile-card {
+  background: #ffffff;
+  border-color: #dbe2ee;
+  color: #1f2632;
+}
+
+:root[data-theme="light"] .smaj-public-search-mobile-form input {
+  background: #ffffff;
+  color: #1f2632;
+  border-color: #d8ccfb;
+}
+
+:root[data-theme="light"] .smaj-public-search-cancel {
+  color: #3f2a7f;
+}
+
+:root[data-theme="light"] .smaj-public-search-mobile-popular-title,
+:root[data-theme="light"] .smaj-public-search-empty {
+  color: #5f5580;
+}
+
+:root[data-theme="light"] .smaj-public-search-mobile-popular a,
+:root[data-theme="light"] .smaj-public-search-mobile-popular button {
+  border-color: #d8ccfb;
+  background: #fff;
+  color: #3f2a7f;
 }
 
 .smaj-search-card-enter {
@@ -409,9 +457,14 @@ h4, h5, h6 {
   background: var(--color-gray-dark);
   color: #ffffff;
   border-radius: 8px;
-  padding: 8px 10px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
   font-weight: 700;
   cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
 }
 
 .smaj-menu-toggle-icon {
@@ -452,11 +505,13 @@ h4, h5, h6 {
 }
 
 .smaj-auth-search-btn {
-  border: 1px solid #d8ccfb;
-  background: #fff;
-  color: #3f2a7f;
+  border: 0;
+  background: transparent;
+  color: #f5f7fb;
   border-radius: 8px;
-  padding: 7px 10px;
+  width: 42px;
+  height: 42px;
+  padding: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -465,6 +520,16 @@ h4, h5, h6 {
   z-index: 6;
   pointer-events: auto;
   margin-right: 8px;
+  transition: background-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+
+.smaj-auth-search-btn svg {
+  font-size: 1.35rem;
+}
+
+.smaj-auth-search-btn:hover {
+  color: #8b5cf6;
+  transform: none;
 }
 
 .smaj-user-info {
@@ -477,25 +542,30 @@ h4, h5, h6 {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin-left: 4px;
+  margin-left: 10px;
 }
 
 .smaj-utility-icon-btn {
-  border: 1px solid #4e596d;
+  border: 0;
   background: transparent;
   color: #ffffff;
-  width: 34px;
-  height: 34px;
+  width: 42px;
+  height: 42px;
   border-radius: 8px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  transition: background-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+
+.smaj-utility-icon-btn svg {
+  font-size: 1.35rem;
 }
 
 .smaj-utility-icon-btn:hover {
-  border-color: #6b3fe6;
-  color: #cfc2ff;
+  color: #8b5cf6;
+  transform: none;
 }
 
 .smaj-username {
@@ -1342,8 +1412,8 @@ h4, h5, h6 {
     right: -100%;
     width: 280px;
     height: 100dvh;
-    background: #ffffff;
-    border-left: 1px solid #e8e2fb;
+    background: #1b2432;
+    border-left: 1px solid #324158;
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -1359,11 +1429,11 @@ h4, h5, h6 {
     padding: 11px 10px;
     border-radius: 8px;
     font-size: 0.98rem;
-    color: #1f2632;
+    color: #e7edf7;
   }
 
   .smaj-nav a.active {
-    color: #3f2a7f;
+    color: #bda7ff;
   }
 
   .smaj-services-menu {
@@ -1376,7 +1446,7 @@ h4, h5, h6 {
     padding: 11px 10px;
     border-radius: 8px;
     font-size: 0.98rem;
-    color: #1f2632;
+    color: #e7edf7;
   }
 
   .smaj-services-trigger svg {
@@ -1389,7 +1459,23 @@ h4, h5, h6 {
     box-shadow: none;
     border-radius: 8px;
     padding: 6px;
-    border-color: #ece5ff;
+    border-color: #324158;
+    background: #1f2a3b;
+  }
+
+  .smaj-services-dropdown a {
+    color: #e7edf7;
+  }
+
+  .smaj-services-dropdown a:hover,
+  .smaj-services-dropdown a:focus-visible {
+    background: #2a3750;
+    color: #ffffff;
+  }
+
+  .smaj-services-dropdown a.active {
+    background: #32425e;
+    color: #cbb9ff;
   }
 
   .smaj-public-search {
@@ -1425,9 +1511,9 @@ h4, h5, h6 {
     align-self: flex-end;
     gap: 6px;
     margin-bottom: 6px;
-    border: 1px solid #d8ccfb;
-    background: #fff;
-    color: #3f2a7f;
+    border: 1px solid #4a5a72;
+    background: #1f2a3b;
+    color: #e7edf7;
     border-radius: 8px;
     padding: 8px 10px;
     font-weight: 700;
@@ -1455,7 +1541,7 @@ h4, h5, h6 {
   .smaj-mobile-auth-sheet {
     margin-top: 8px;
     display: block;
-    border-top: 0;
+    border-top: 1px solid #324158;
     padding-top: 6px;
     padding-bottom: 0;
   }
@@ -1481,22 +1567,37 @@ h4, h5, h6 {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    color: #1f2632;
+    color: #e7edf7;
     font-size: 1rem;
     font-weight: 500;
   }
 
+  .smaj-mobile-pref-lang-btn {
+    border: 0;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .smaj-mobile-pref-lang-btn:hover {
+    color: #6b3fe6;
+  }
+
   .smaj-mobile-pref-label svg {
-    color: #9aa3b2;
+    color: #a9b5c8;
+  }
+
+  .smaj-mobile-pref-lang-btn:hover svg {
+    color: #6b3fe6;
   }
 
   .smaj-mobile-theme-switch {
     display: inline-flex;
     align-items: center;
     padding: 2px;
-    border: 1px solid #d7dce5;
+    border: 1px solid #4a5a72;
     border-radius: 10px;
-    background: #f7f8fb;
+    background: #1f2a3b;
     gap: 2px;
   }
 
@@ -1506,17 +1607,22 @@ h4, h5, h6 {
     height: 28px;
     border-radius: 8px;
     background: transparent;
-    color: #5c6472;
+    color: #d4ddeb;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    transition: color 0.18s ease, background-color 0.18s ease;
   }
 
-  .smaj-mobile-theme-btn:first-child {
-    background: #ffffff;
-    color: #2d3441;
-    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.16);
+  .smaj-mobile-theme-btn.active {
+    background: #2a3750;
+    color: #ffffff;
+    box-shadow: 0 1px 2px rgba(4, 8, 16, 0.35);
+  }
+
+  .smaj-mobile-theme-btn:hover {
+    color: #6b3fe6;
   }
 
   .smaj-mobile-auth-sheet .smaj-auth-feedback {

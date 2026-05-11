@@ -76,6 +76,7 @@ const Header = () => {
   const [searchPhraseIndex, setSearchPhraseIndex] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
+  const [mobileThemeMode, setMobileThemeMode] = useState<"light" | "dark">("light");
   const location = useLocation();
   const navigate = useNavigate();
   const searchInputRef = useRef<HTMLInputElement | null>(null);
@@ -288,19 +289,29 @@ const Header = () => {
                   <span>Theme</span>
                 </div>
                 <div className="smaj-mobile-theme-switch" role="group" aria-label="Theme mode">
-                  <button type="button" className="smaj-mobile-theme-btn" aria-label="Light mode">
+                  <button
+                    type="button"
+                    className={`smaj-mobile-theme-btn ${mobileThemeMode === "light" ? "active" : ""}`}
+                    aria-label="Light mode"
+                    onClick={() => setMobileThemeMode("light")}
+                  >
                     <LightModeOutlinedIcon fontSize="small" />
                   </button>
-                  <button type="button" className="smaj-mobile-theme-btn" aria-label="Dark mode">
+                  <button
+                    type="button"
+                    className={`smaj-mobile-theme-btn ${mobileThemeMode === "dark" ? "active" : ""}`}
+                    aria-label="Dark mode"
+                    onClick={() => setMobileThemeMode("dark")}
+                  >
                     <DarkModeOutlinedIcon fontSize="small" />
                   </button>
                 </div>
               </div>
               <div className="smaj-mobile-pref-item">
-                <div className="smaj-mobile-pref-label">
+                <button type="button" className="smaj-mobile-pref-label smaj-mobile-pref-lang-btn" aria-label="Language">
                   <LanguageIcon fontSize="small" />
                   <span>English</span>
-                </div>
+                </button>
               </div>
             </div>
             {authFeedback ? (
