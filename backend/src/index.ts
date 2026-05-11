@@ -9,7 +9,7 @@ import MongoStore from "connect-mongo";
 import { MongoClient } from "mongodb";
 import env from "./environments";
 import mountPaymentsEndpoints from "./handlers/payments";
-import mountUserEndpoints from "./handlers/users";
+import mountUserEndpoints, { handleSignIn } from "./handlers/users";
 
 // We must import typedefs for ts-node-dev to pick them up when they change (even though tsc would supposedly
 // have no problem here)
@@ -85,6 +85,9 @@ app.use("/payments", paymentsRouter);
 const userRouter = express.Router();
 mountUserEndpoints(userRouter);
 app.use("/user", userRouter);
+
+// Canonical auth endpoint matching FLOWS.md Authentication section.
+app.post("/signin", handleSignIn);
 
 // Notification endpoints under /notifications:
 const notificationRouter = express.Router();

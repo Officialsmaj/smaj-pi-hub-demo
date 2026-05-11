@@ -1,7 +1,7 @@
 import { AxiosError } from "axios";
 import { useCallback, useState, useEffect } from "react";
 import { axiosClient } from "../lib/axiosClient";
-import type { AuthResult, PaymentDTO, User } from "../types/pi";
+import type { AuthResult, User } from "../types/pi";
 
 type AuthFeedback = {
   type: "success" | "error";
@@ -66,17 +66,9 @@ export const useAuth = () => {
     checkSession();
   }, []); // Run once on mount
 
-  const onIncompletePaymentFound = useCallback(async (payment: PaymentDTO) => {
-    try {
-      await axiosClient.post("/payments/incomplete", { payment });
-    } catch (err) {
-      console.error("Error handling incomplete payment:", err);
-    }
-  }, []);
-
   const signInUser = useCallback(async (authResult: AuthResult) => {
     try {
-      await axiosClient.post("/user/signin", { authResult });
+      await axiosClient.post("/signin", { authResult });
       setUser(authResult.user);
       setShowSignIn(false);
       setAuthFeedback({ type: "success", message: `Signed in as ${authResult.user.username}.` });
@@ -96,8 +88,8 @@ export const useAuth = () => {
     }
 
     try {
-      const scopes = ["username", "payments", "roles", "in_app_notifications"];
-      const authResult = await window.Pi.authenticate(scopes, onIncompletePaymentFound);
+      const scopes = ["username"];
+      const authResult = await window.Pi.authenticate(scopes);
       await signInUser(authResult);
     } catch (err) {
       console.error("Sign-in process failed:", err);
@@ -110,7 +102,7 @@ export const useAuth = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [onIncompletePaymentFound, signInUser]);
+  }, [signInUser]);
 
   const signOut = useCallback(async () => {
     setIsLoading(true);

@@ -7,7 +7,7 @@ declare global {
       sandbox?: string;
     };
     Pi: {
-      authenticate(scopes: string[], onIncompletePaymentFound: (payment: PaymentDTO) => void): Promise<AuthResult>;
+      authenticate(scopes: string[], onIncompletePaymentFound?: (payment: PaymentDTO) => void): Promise<AuthResult>;
 
       createPayment(
         data: {
