@@ -13,23 +13,6 @@ type BackendErrorBody = {
   message?: string;
 };
 
-const PI_AUTH_TIMEOUT_MS = 10_000;
-
-const authenticateWithTimeout = (
-  scopes: string[],
-  onIncompletePaymentFound: (payment: PaymentDTO) => void,
-  timeoutMs: number,
-) => {
-  return Promise.race<AuthResult>([
-    window.Pi.authenticate(scopes, onIncompletePaymentFound),
-    new Promise<AuthResult>((_, reject) => {
-      setTimeout(() => {
-        reject(new Error("PI_AUTH_TIMEOUT"));
-      }, timeoutMs);
-    }),
-  ]);
-};
-
 const toErrorMessage = (err: unknown) => {
   const axiosErr = err as AxiosError<BackendErrorBody>;
 
@@ -42,10 +25,6 @@ const toErrorMessage = (err: unknown) => {
 
   if (status === 401) {
     return "Pi token verification failed (401). If you are in Sandbox, set backend PLATFORM_API_URL to sandbox and verify PI_API_KEY.";
-  }
-
-  if (status === 405) {
-    return "Login endpoint rejected the request (405). BACKEND_URL is likely misconfigured and requests are going to the frontend server instead of the backend API.";
   }
 
   if (backendMessage) {
@@ -118,18 +97,13 @@ export const useAuth = () => {
 
     try {
       const scopes = ["username", "payments", "roles", "in_app_notifications"];
-      const authResult = await authenticateWithTimeout(scopes, onIncompletePaymentFound, PI_AUTH_TIMEOUT_MS);
+      const authResult = await window.Pi.authenticate(scopes, onIncompletePaymentFound);
       await signInUser(authResult);
     } catch (err) {
       console.error("Sign-in process failed:", err);
       // Only show generic Pi Browser error if it's not a backend Axios error
       if ((err as any).isAxiosError || (err as AxiosError).response) {
         setAuthFeedback({ type: "error", message: toErrorMessage(err) });
-      } else if ((err as Error)?.message === "PI_AUTH_TIMEOUT") {
-        setAuthFeedback({
-          type: "error",
-          message: "Pi login request timed out. Please reopen the app from Pi Browser and try again.",
-        });
       } else {
         setAuthFeedback({ type: "error", message: "Authentication was cancelled or failed in Pi Browser." });
       }

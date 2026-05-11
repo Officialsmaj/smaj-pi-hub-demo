@@ -1,7 +1,7 @@
 .footer {
   padding: 4rem 2rem 2rem;
-  background-color: #ffffff;
-  border-top: 1px solid #eaeaea;
+  background-color: var(--color-gray-dark);
+  border-top: 1px solid var(--color-gray-med);
 }
 
 .footerGrid {
@@ -13,7 +13,7 @@
 }
 
 .footerGrid h4 {
-  color: #1a1a1a;
+  color: #ffffff;
   margin-bottom: 1.25rem;
   font-size: 1rem;
   text-transform: uppercase;
@@ -21,7 +21,7 @@
 }
 
 .footerGrid p {
-  color: #666;
+  color: #ffffff;
   line-height: 1.6;
   font-size: 0.95rem;
 }
@@ -30,7 +30,7 @@
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  color: #444;
+  color: #ffffff;
   text-decoration: none;
   margin-bottom: 0.8rem;
   font-size: 0.9rem;
@@ -45,7 +45,7 @@
   max-width: 1200px;
   margin: 4rem auto 0;
   padding-top: 2rem;
-  border-top: 1px solid #f0f0f0;
+  border-top: 1px solid var(--color-gray-med);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -55,7 +55,7 @@
 
 .copyright {
   text-align: center;
-  color: #999;
+  color: #ffffff;
   font-size: 0.82rem;
   margin: 0;
 }
@@ -76,7 +76,7 @@
 }
 
 .legalLinksRow a {
-  color: #444;
+  color: #ffffff;
   text-decoration: none;
   font-size: 0.75rem;
   transition: color 0.2s;
@@ -100,8 +100,8 @@
   width: 30px;
   height: 30px;
   border-radius: 999px;
-  border: 1px solid #e5e7eb;
-  color: #444;
+  border: 1px solid var(--color-gray-med);
+  color: #ffffff;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -110,9 +110,10 @@
 }
 
 .socialIcon:hover {
-  background-color: #673ab7;
-  border-color: #673ab7;
-  color: #fff;
+  background-color: transparent;
+  border-color: #8b5cf6;
+  color: #8b5cf6;
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.15);
 }
 
 
@@ -155,7 +156,7 @@
 .poweredText {
   margin: 0;
   font-size: 0.875rem;
-  color: #6b7280;
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;

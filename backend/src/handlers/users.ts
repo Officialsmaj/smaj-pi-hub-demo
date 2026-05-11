@@ -5,9 +5,6 @@ import express, { Router, Request, Response } from "express";
 export default function mountUserEndpoints(router: Router) {
   // POST /user/signin
   router.post("/signin", async (req: Request, res: Response) => {
-    // handle the user auth accordingly
-    console.log("=== POST /user/signin HIT ===", req.body?.authResult?.user?.username || "no user");
-    console.log("AccessToken length:", req.body?.authResult?.accessToken?.length || "no token");
     const auth = req.body.authResult;
     const userCollection = req.app.locals.userCollection;
 
@@ -15,12 +12,9 @@ export default function mountUserEndpoints(router: Router) {
       return res.status(503).json({ error: "service_unavailable", message: "Database not ready" });
     }
 
-try {
+    try {
       // Verify the user's access token with the /me endpoint:
-      console.log("Calling Pi /me with token...");
       const me = await platformAPIClient.get(`/v2/me`, { headers: { Authorization: `Bearer ${auth.accessToken}` } });
-
-      console.log("Pi /me response:", me.status, me.data?.username || "no username");
     } catch (err) {
       console.error("Error verifying access token:", err);
       return res.status(401).json({ error: "invalid_token", message: "Invalid access token" });

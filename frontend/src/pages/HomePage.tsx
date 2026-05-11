@@ -116,7 +116,7 @@ const HomePage = () => {
           <div className="home-service-grid">
             {previewServices.map((service) => (
               <article key={service.name} className="home-service-card">
-                <p style={{ display: "flex", alignItems: "center", gap: "0.4rem", marginBottom: "0.6rem", color: "#5d4f80" }}>
+                <p style={{ display: "flex", alignItems: "center", gap: "0.4rem", marginBottom: "0.6rem", color: "#d4dbea" }}>
                   {service.icon}
                   <strong>{service.name}</strong>
                 </p>

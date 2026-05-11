@@ -13,8 +13,9 @@ export const colors = {
   darkCard: '#111',         // Cards in dark mode
   lightBg: '#ffffff',       // Main backgrounds
   lightCard: '#fff',        // Light cards
-  grayDark: '#131b31',      // Headings
-  grayMed: '#4b5368',       // Body text
+  grayDark: '#29313d',      // Headings
+  grayMed: '#707a8a',       // Body text
+  disableText: '#4f5867',   // Disabled text
   grayLight: '#d4d8e4',     // Secondary text
   borderLight: '#e6eaf5',   // Borders
   pillBg: '#f0e9ff',        // Purple pills
@@ -67,6 +68,7 @@ export const cssVariables = `
     --color-light-bg: ${colors.lightBg};
     --color-gray-dark: ${colors.grayDark};
     --color-gray-med: ${colors.grayMed};
+    --color-DisableText: ${colors.disableText};
     --color-text-light: ${colors.grayLight};
     
     /* Spacing */
@@ -85,4 +87,3 @@ export const cssVariables = `
     --shadow-hover: ${shadows.hover};
   }
 ` as const;
-

@@ -4,6 +4,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import LoginIcon from "@mui/icons-material/Login";
 import SearchIcon from "@mui/icons-material/Search";
+import LanguageIcon from "@mui/icons-material/Language";
+import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
+import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { useAuthContext } from "../contexts/AuthContext";
@@ -53,6 +56,17 @@ const rotatingSearchPhrases = [
 ];
 
 const trendingSearches = ["Jobs", "Phones", "Apartments", "Sports", "Food Delivery"];
+
+const UtilityIcons = () => (
+  <div className="smaj-utility-icons" aria-label="Utility actions">
+    <button type="button" className="smaj-utility-icon-btn" aria-label="Language and region">
+      <LanguageIcon fontSize="small" />
+    </button>
+    <button type="button" className="smaj-utility-icon-btn" aria-label="Display mode">
+      <LightModeOutlinedIcon fontSize="small" />
+    </button>
+  </div>
+);
 
 const Header = () => {
   const { user, isAuthenticated, signIn, signOut, isLoading, authFeedback } = useAuthContext();
@@ -267,6 +281,28 @@ const Header = () => {
             </NavLink>
           ))}
           <div className="smaj-mobile-auth-sheet">
+            <div className="smaj-mobile-pref-list" aria-label="Mobile preferences">
+              <div className="smaj-mobile-pref-item">
+                <div className="smaj-mobile-pref-label">
+                  <LightModeOutlinedIcon fontSize="small" />
+                  <span>Theme</span>
+                </div>
+                <div className="smaj-mobile-theme-switch" role="group" aria-label="Theme mode">
+                  <button type="button" className="smaj-mobile-theme-btn" aria-label="Light mode">
+                    <LightModeOutlinedIcon fontSize="small" />
+                  </button>
+                  <button type="button" className="smaj-mobile-theme-btn" aria-label="Dark mode">
+                    <DarkModeOutlinedIcon fontSize="small" />
+                  </button>
+                </div>
+              </div>
+              <div className="smaj-mobile-pref-item">
+                <div className="smaj-mobile-pref-label">
+                  <LanguageIcon fontSize="small" />
+                  <span>English</span>
+                </div>
+              </div>
+            </div>
             {authFeedback ? (
               <p className={`smaj-auth-feedback smaj-auth-feedback-${authFeedback.type}`}>{authFeedback.message}</p>
             ) : null}
@@ -307,24 +343,21 @@ const Header = () => {
               </button>
             </div>
           ) : (
-            <button onClick={signIn} className="smaj-login-btn" disabled={isLoading}>
-              <span className="smaj-login-icon" aria-hidden="true">
-                <LoginIcon fontSize="small" />
-              </span>
-              <span className="smaj-login-text">{isLoading ? "Signing in..." : "Login with Pi"}</span>
-            </button>
+            <>
+              <button onClick={signIn} className="smaj-login-btn" disabled={isLoading}>
+                <span className="smaj-login-icon" aria-hidden="true">
+                  <LoginIcon fontSize="small" />
+                </span>
+                <span className="smaj-login-text">{isLoading ? "Signing in..." : "Login with Pi"}</span>
+              </button>
+              <UtilityIcons />
+            </>
           )}
         </div>
       </div>
       {isSearchModalOpen ? (
         <div className="smaj-search-panel-anchor">
           <div ref={searchPanelRef} className="smaj-public-search-mobile-card smaj-search-card-enter">
-            <div className="smaj-public-search-mobile-head">
-              <h2>Search SMAJ PI HUB</h2>
-              <button type="button" onClick={closeSearchModal} aria-label="Close search">
-                <CloseIcon fontSize="small" />
-              </button>
-            </div>
             <div className="smaj-public-search-mobile-form">
               <div className="smaj-public-search-input-wrap">
                 <span className="smaj-public-search-inline-icon" aria-hidden="true">
