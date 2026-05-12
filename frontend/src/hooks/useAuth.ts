@@ -13,6 +13,16 @@ type BackendErrorBody = {
   message?: string;
 };
 
+const PI_AUTH_TIMEOUT_MS = 30000;
+
+const authenticateWithTimeout = (scopes: string[]) =>
+  Promise.race<AuthResult>([
+    window.Pi.authenticate(scopes),
+    new Promise<AuthResult>((_, reject) => {
+      setTimeout(() => reject(new Error("PI_AUTH_TIMEOUT")), PI_AUTH_TIMEOUT_MS);
+    }),
+  ]);
+
 const toErrorMessage = (err: unknown) => {
   const axiosErr = err as AxiosError<BackendErrorBody>;
 
@@ -89,13 +99,18 @@ export const useAuth = () => {
 
     try {
       const scopes = ["username"];
-      const authResult = await window.Pi.authenticate(scopes);
+      const authResult = await authenticateWithTimeout(scopes);
       await signInUser(authResult);
     } catch (err) {
       console.error("Sign-in process failed:", err);
       // Only show generic Pi Browser error if it's not a backend Axios error
       if ((err as any).isAxiosError || (err as AxiosError).response) {
         setAuthFeedback({ type: "error", message: toErrorMessage(err) });
+      } else if ((err as Error)?.message === "PI_AUTH_TIMEOUT") {
+        setAuthFeedback({
+          type: "error",
+          message: "Pi login timed out. Please close Pi Browser, reopen it, and try Login with Pi again.",
+        });
       } else {
         setAuthFeedback({ type: "error", message: "Authentication was cancelled or failed in Pi Browser." });
       }

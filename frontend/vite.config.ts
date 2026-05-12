@@ -7,7 +7,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
   const isPublicBuild = mode === "public";
   return {
-    base: "/smajpihub/",
+    base: isPublicBuild ? "/smajpihub/" : "/",
     plugins: [
       react(),
       {

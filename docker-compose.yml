@@ -20,6 +20,8 @@ services:
 
   frontend:
     build: ./frontend
+    ports:
+      - "80:80"
     environment:
       BACKEND_URL: ${BACKEND_URL}
       SANDBOX_SDK: ${SANDBOX_SDK}
