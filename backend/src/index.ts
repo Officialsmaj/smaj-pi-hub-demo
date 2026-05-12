@@ -47,9 +47,36 @@ app.use(
 app.use(express.json());
 
 // Handle CORS:
+const allowedOrigins = new Set(
+  (env.frontend_url || "")
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean),
+);
+
 app.use(
   cors({
-    origin: env.frontend_url,
+    origin: (origin, callback) => {
+      // Allow non-browser or same-origin server requests.
+      if (!origin) {
+        callback(null, true);
+        return;
+      }
+
+      // Primary configured frontend origin(s).
+      if (allowedOrigins.has(origin)) {
+        callback(null, true);
+        return;
+      }
+
+      // Allow Codespaces preview hosts and Pi Sandbox host for testnet app wrapper.
+      if (origin.endsWith(".app.github.dev") || origin === "https://sandbox.minepi.com") {
+        callback(null, true);
+        return;
+      }
+
+      callback(new Error(`CORS blocked origin: ${origin}`));
+    },
     credentials: true,
   }),
 );
