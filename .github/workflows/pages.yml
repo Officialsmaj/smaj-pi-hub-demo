@@ -26,8 +26,8 @@ jobs:
       - name: Install frontend dependencies
         run: npm install --prefix frontend
 
-      - name: Build frontend
-        run: npm run build --prefix frontend
+      - name: Build frontend (GitHub Pages public mode)
+        run: npm run build:public --prefix frontend
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v4
@@ -35,7 +35,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v5
         with:
-          path: frontend/dist
+          path: frontend/dist-public
 
   deploy:
     needs: build-and-deploy

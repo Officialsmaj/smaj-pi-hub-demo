@@ -4,9 +4,11 @@ import * as path from "node:path";
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), "");
+  const rootDir = __dirname;
+  const env = loadEnv(mode, rootDir, "");
   const isPublicBuild = mode === "public";
   return {
+    root: rootDir,
     base: isPublicBuild ? "/smajpihub/" : "/",
     plugins: [
       react(),
@@ -26,10 +28,10 @@ export default defineConfig(({ mode }) => {
     },
     build: isPublicBuild
       ? {
-          // Publish directly to repository root for single public deploy output.
-          outDir: "../",
+          // GitHub Pages build output (uploaded by Actions workflow).
+          outDir: "dist-public",
           assetsDir: "assets",
-          emptyOutDir: false,
+          emptyOutDir: true,
         }
       : undefined,
     server: {
