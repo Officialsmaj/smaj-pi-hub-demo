@@ -15,8 +15,8 @@ const ServicesPage = () => {
               <h1>Access Every SMAJ Platform From One Place</h1>
               <p>Connect your wallet once and unlock all 15 SMAJ ecosystem platforms from one trusted gateway.</p>
               <div className="home-hero-cta">
-                <ActionButton href="https://devsmaj.github.io/smajpihub/">
-                  Open Unified Dashboard
+                <ActionButton href="https://github.com/devsmaj/smajpihub">
+                  Open Repository
                 </ActionButton>
                 <ActionButton to="/how-it-works" variant="secondary">
                   How It Works
