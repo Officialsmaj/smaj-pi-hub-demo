@@ -18,8 +18,8 @@ const HowItWorksPage = () => {
           <p>Connect once, explore what you need, use services with Pi, and support the community.</p>
           <div className="home-hero-cta">
             <Link to="/services">Explore Services</Link>
-            <a href="https://devsmaj.github.io/smajpihub/" target="_blank" rel="noreferrer">
-              Open Dashboard
+            <a href="https://github.com/devsmaj/smajpihub" target="_blank" rel="noreferrer">
+              Open Repository
             </a>
           </div>
         </section>
