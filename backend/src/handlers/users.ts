@@ -1,24 +1,7 @@
-import { Router, Request, Response } from "express";
-
+import express, { Router, Request, Response } from "express";
+ 
 import platformAPIClient from "../services/platformAPIClient";
-
-type VerifiedPiUser = {
-  uid?: string;
-  username?: string;
-};
-
-const destroySession = (req: Request, res: Response) => {
-  req.session.destroy((err) => {
-    if (err) {
-      console.error("Error during signout:", err);
-      return res.status(500).json({ error: "internal_error", message: "Failed to sign out" });
-    }
-
-    res.clearCookie("connect.sid");
-    return res.status(200).json({ message: "User signed out" });
-  });
-};
-
+ 
 export const handleSignIn = async (req: Request, res: Response) => {
   const auth = req.body?.authResult;
   const userCollection = req.app.locals.userCollection;
@@ -31,34 +14,16 @@ export const handleSignIn = async (req: Request, res: Response) => {
     return res.status(503).json({ error: "service_unavailable", message: "Database not ready" });
   }
 
-  let verifiedUser: VerifiedPiUser;
-
   try {
-    const meResponse = await platformAPIClient.get<VerifiedPiUser>("/v2/me", {
-      headers: { Authorization: `Bearer ${auth.accessToken}` },
-    });
-    verifiedUser = meResponse.data ?? {};
+    // Verify the user's access token with the /me endpoint:
+    await platformAPIClient.get(`/v2/me`, { headers: { Authorization: `Bearer ${auth.accessToken}` } });
   } catch (err) {
     console.error("Error verifying access token:", err);
     return res.status(401).json({ error: "invalid_token", message: "Invalid access token" });
   }
 
-  if (verifiedUser.uid && verifiedUser.uid !== auth.user.uid) {
-    return res.status(401).json({ error: "invalid_token", message: "Authenticated user mismatch" });
-  }
-
-  if (verifiedUser.username && verifiedUser.username !== auth.user.username) {
-    return res.status(401).json({ error: "invalid_token", message: "Authenticated username mismatch" });
-  }
-
-  const normalizedUser = {
-    uid: verifiedUser.uid || auth.user.uid,
-    username: verifiedUser.username || auth.user.username,
-    roles: Array.isArray(auth.user.roles) ? auth.user.roles : [],
-  };
-
   try {
-    let currentUser = await userCollection.findOne({ uid: normalizedUser.uid });
+    let currentUser = await userCollection.findOne({ uid: auth.user.uid });
 
     if (currentUser) {
       await userCollection.updateOne(
@@ -67,19 +32,15 @@ export const handleSignIn = async (req: Request, res: Response) => {
         },
         {
           $set: {
-            username: normalizedUser.username,
-            roles: normalizedUser.roles,
             accessToken: auth.accessToken,
           },
         },
       );
-
-      currentUser = await userCollection.findOne({ _id: currentUser._id });
     } else {
       const insertResult = await userCollection.insertOne({
-        username: normalizedUser.username,
-        uid: normalizedUser.uid,
-        roles: normalizedUser.roles,
+        username: auth.user.username,
+        uid: auth.user.uid,
+        roles: auth.user.roles,
         accessToken: auth.accessToken,
       });
 
@@ -105,7 +66,9 @@ export default function mountUserEndpoints(router: Router) {
     });
   });
 
-  // GET|POST /user/signout
-  router.get("/signout", destroySession);
-  router.post("/signout", destroySession);
+  // GET /user/signout
+  router.get("/signout", async (req: Request, res: Response) => {
+    req.session.currentUser = null;
+    return res.status(200).json({ message: "User signed out" });
+  });
 }
