@@ -27,11 +27,37 @@ const mongoClientOptions = {
   },
 };
 
+const parseOrigins = (value: string) =>
+  value
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean);
+
+const allowedOrigins = new Set(parseOrigins(env.frontend_url || ""));
+const oneWeekMs = 7 * 24 * 60 * 60 * 1000;
+
+const isSecureOrigin = (origin: string) => {
+  try {
+    return new URL(origin).protocol === "https:";
+  } catch {
+    return false;
+  }
+};
+
+const isAllowedBrowserOrigin = (origin: string) => {
+  if (allowedOrigins.has(origin)) {
+    return true;
+  }
+
+  return origin.endsWith(".app.github.dev") || origin === "https://sandbox.minepi.com";
+};
+
 //
 // I. Initialize and set up the express app and various middlewares and packages:
 //
 
 const app: express.Application = express();
+app.set("trust proxy", 1);
 
 // Log requests to the console in a compact format:
 app.use(logger("dev"));
@@ -47,13 +73,6 @@ app.use(
 app.use(express.json());
 
 // Handle CORS:
-const allowedOrigins = new Set(
-  (env.frontend_url || "")
-    .split(",")
-    .map((origin) => origin.trim())
-    .filter(Boolean),
-);
-
 app.use(
   cors({
     origin: (origin, callback) => {
@@ -90,6 +109,13 @@ app.use(
     secret: env.session_secret,
     resave: false,
     saveUninitialized: false,
+    proxy: true,
+    cookie: {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: false,
+      maxAge: oneWeekMs,
+    },
     store: MongoStore.create({
       mongoUrl: mongoUri,
       mongoOptions: mongoClientOptions,
@@ -98,6 +124,17 @@ app.use(
     }),
   }) as unknown as express.RequestHandler,
 );
+
+// Enable cross-site session cookies only for already-allowed secure browser origins.
+app.use((req, _res, next) => {
+  const origin = req.get("origin") || "";
+  const useCrossSiteCookie = isAllowedBrowserOrigin(origin) && isSecureOrigin(origin);
+
+  req.session.cookie.sameSite = useCrossSiteCookie ? "none" : "lax";
+  req.session.cookie.secure = useCrossSiteCookie;
+
+  next();
+});
 
 //
 // II. Mount app endpoints:
