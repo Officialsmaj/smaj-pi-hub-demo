@@ -13,6 +13,10 @@ type BackendErrorBody = {
   message?: string;
 };
 
+type SignInResponse = {
+  user?: Partial<User> | null;
+};
+
 const PI_AUTH_TIMEOUT_MS = 30000;
 
 const authenticateWithTimeout = (scopes: string[]) =>
@@ -44,10 +48,16 @@ const toErrorMessage = (err: unknown) => {
   return `Login failed with status ${status}.`;
 };
 
+const toUser = (candidate: Partial<User> | null | undefined, fallback: User): User => ({
+  uid: candidate?.uid || fallback.uid,
+  username: candidate?.username || fallback.username,
+  roles: Array.isArray(candidate?.roles) ? candidate.roles : fallback.roles,
+});
+
 export const useAuth = () => {
   const [user, setUser] = useState<User | null>(null);
   const [showSignIn, setShowSignIn] = useState(false);
-  const [isLoading, setIsLoading] = useState(true); // Initialize as true for initial session check
+  const [isLoading, setIsLoading] = useState(true);
   const [authFeedback, setAuthFeedback] = useState<AuthFeedback | null>(null);
 
   useEffect(() => {
@@ -57,34 +67,33 @@ export const useAuth = () => {
     }
   }, [authFeedback]);
 
-  // Effect for initial session check
   useEffect(() => {
     const checkSession = async () => {
       try {
-        // Assuming /user endpoint returns current user if logged in
-        const response = await axiosClient.get("/user");
-        if (response.data?.user) {
-          setUser(response.data.user);
+        const response = await axiosClient.get<{ user?: Partial<User> | null }>("/user");
+        if (response.data?.user?.uid && response.data.user.username) {
+          setUser({
+            uid: response.data.user.uid,
+            username: response.data.user.username,
+            roles: Array.isArray(response.data.user.roles) ? response.data.user.roles : [],
+          });
         }
       } catch (err) {
-        // No active session found or backend unreachable, user remains null
         console.log("No active session found or error checking session:", err);
       } finally {
         setIsLoading(false);
       }
     };
     checkSession();
-  }, []); // Run once on mount
+  }, []);
 
   const signInUser = useCallback(async (authResult: AuthResult) => {
-    try {
-      await axiosClient.post("/signin", { authResult });
-      setUser(authResult.user);
-      setShowSignIn(false);
-      setAuthFeedback({ type: "success", message: `Signed in as ${authResult.user.username}.` });
-    } catch (err) {
-      throw err; // Re-throw to allow `signIn` to catch and handle loading/feedback
-    }
+    const response = await axiosClient.post<SignInResponse>("/signin", { authResult });
+    const signedInUser = toUser(response.data?.user, authResult.user);
+
+    setUser(signedInUser);
+    setShowSignIn(false);
+    setAuthFeedback({ type: "success", message: `Signed in as ${signedInUser.username}.` });
   }, []);
 
   const signIn = useCallback(async () => {
@@ -103,8 +112,7 @@ export const useAuth = () => {
       await signInUser(authResult);
     } catch (err) {
       console.error("Sign-in process failed:", err);
-      // Only show generic Pi Browser error if it's not a backend Axios error
-      if ((err as any).isAxiosError || (err as AxiosError).response) {
+      if ((err as AxiosError).response) {
         setAuthFeedback({ type: "error", message: toErrorMessage(err) });
       } else if ((err as Error)?.message === "PI_AUTH_TIMEOUT") {
         setAuthFeedback({
@@ -122,7 +130,7 @@ export const useAuth = () => {
   const signOut = useCallback(async () => {
     setIsLoading(true);
     try {
-      await axiosClient.get("/user/signout");
+      await axiosClient.post("/user/signout");
       setUser(null);
       setAuthFeedback({ type: "success", message: "Signed out successfully." });
     } catch (err) {
